@@ -1,0 +1,79 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/tattoosearch
+    docker:
+      - image: circleci/php:7.1.23-apache-stretch-node-browsers-legacy
+        environment:
+          APP_ENV: test
+          DATABASE_URL: mysql://root:root@127.0.0.1/micro-post
+          MAILER_FROM: tattoo@tattoo-search.com
+          MAILER_URL: null://localhost
+      - image: circleci/mysql:5.7
+        environment:
+          MYSQL_ROOT_PASSWORD: 'root'
+          MYSQL_DATABASE: tattoo-search
+    steps:
+      - checkout
+      - run:
+          name: Install apt
+          command: sudo apt-get install -y zlib1g-dev
+      - run:
+          name: Install PHP MySQL
+          command: sudo docker-php-ext-install pdo_mysql zip
+      - run:
+          name: Wait for MySQL
+          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 120s
+      - run:
+          name: Composer
+          command: sudo composer self-update
+      - run:
+          name: Composer install
+          command: composer install -n --prefer-dist
+      - run:
+          name: chmod permissions
+          command: chmod +x ./bin/phpunit
+      - run:
+          name: Run tests
+          command: ./bin/phpunit
+  deploy:
+    working_directory: ~/tattoosearch
+    docker:
+      - image: circleci/php:7.1.23-apache-stretch-node-browsers-legacy
+    steps:
+      - checkout
+      - run:
+          name: Composer install
+          command: composer install -n --prefer-dist
+      - run:
+          name: Clear cache
+          command: php bin/console cache:clear --env=prod --no-interaction
+      - run:
+          name: Cache warmup
+          command: php bin/console cache:warmup --env=prod --no-interaction
+      - run:
+          name: Encore
+          command: yarn install && yarn run build
+      - run:
+          name: Add droplet
+          command: ssh-keyscan -H $DROPLET_IP >> ~/.ssh/known_hosts
+      - run:
+          name: Pre-deploy
+          command: ssh -T $DROPLET_USER@$DROPLET_IP < bin/deploy/pre_deploy.sh
+      - run:
+          name: Deploy code
+          command: rsync -vzcrSLhp --exclude '.env' --delete ~/tattoosearch/ $DROPLET_USER@$DROPLET_IP:/var/www/tattoosearch_current
+      - run:
+          name: Post deploy
+          command: ssh -T $DROPLET_USER@$DROPLET_IP < bin/deploy/deploy.sh
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master

@@ -21,7 +21,7 @@ class DefaultController extends Controller
     public function index()
     {
 
-        $html = $this->renderView('base.html.twig');
+        $html = $this->renderView('index/index.html.twig');
 
         return new Response($html);
     }
