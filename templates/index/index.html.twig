@@ -2,7 +2,10 @@
 
 {% block body %}
 
-    <h2>Start the search for your dream tattoo!</h2>
-    <p>This is the first paragraph.</p>
+    <h2>Start the search for your dream tattoo!
+        {% if is_granted('ROLE_USER') == false %}
+            <br><a href="{{ path('user_register') }}">Register here</a>
+        {% endif %}
+            </h2>
 
 {% endblock %}
