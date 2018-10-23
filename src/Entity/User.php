@@ -62,6 +62,11 @@ class User implements UserInterface, \Serializable
      */
     private $roles;
 
+    public function __construct()
+    {
+        $this->roles = [self::ROLE_USER];
+    }
+
     public function getId(): ?int
     {
         return $this->id;

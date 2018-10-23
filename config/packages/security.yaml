@@ -36,8 +36,9 @@ security:
 
             remember_me:
                 secret:   '%kernel.secret%'
-                lifetime: 2629744 # 1 week in seconds
+                lifetime: 2629744 # 1 month in seconds
                 path:     /
+                token_provider: token_provider
                 # secure: true
                 # by default, the feature is enabled by checking a
                 # uncomment the following line to always enable it.

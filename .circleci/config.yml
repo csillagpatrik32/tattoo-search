@@ -6,7 +6,7 @@ jobs:
       - image: circleci/php:7.1.23-apache-stretch-node-browsers-legacy
         environment:
           APP_ENV: test
-          DATABASE_URL: mysql://root:root@127.0.0.1/micro-post
+          DATABASE_URL: mysql://root:root@127.0.0.1/tattoo_search
           MAILER_FROM: tattoo@tattoo-search.com
           MAILER_URL: null://localhost
       - image: circleci/mysql:5.7
