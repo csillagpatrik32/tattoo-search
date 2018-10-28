@@ -16,27 +16,40 @@
         <ul class="navbar-nav px-3">
             {% if is_granted('ROLE_USER') %}
                 <li class="nav-item text-nowrap">
-                    <a class="nav-link" href="">Some function</a>
+                    <a class="nav-link" href="">{{ 'Some function'|trans }}</a>
                 </li>
             {% endif %}
         </ul>
     </div>
 
-    <div class="order-2 order-md-1">
+    <div class="dropdown">
+        <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownLang" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img src="{{ asset('images/css/flags/blank.gif') }}" class="flag flag-{{ app.request.getLocale() }}" alt="lang-{{ app.request.getLocale() }}" />
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownLang">
+            {% for lang in languages %}
+                {% if lang != app.request.getLocale() %}
+                    <a href="{{ path('change_lang', {'lang': lang} ) }}"><button class="dropdown-item" type="button"><img src="{{ asset('images/css/flags/blank.gif') }}" class="flag flag-{{ lang }}" alt="lang-{{ lang }}" /></button></a>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="order-3 order-md-1">
         <ul class="navbar-nav px-3">
             {% if is_granted('ROLE_USER') %}
                 <li class="nav-item text-nowrap">
                     <a class="nav-link"
-                       href="#">{{ app.user.fullName }}</a>
+                       href="{{ path('profile') }}">{{ app.user.fullName }}</a>
                 </li>
                 <li class="nav-item text-nowrap">
                     <a class="nav-link"
-                       href="{{ logout_path() }}">Sign out</a>
+                       href="{{ logout_path() }}">{{ 'Sign out'|trans }}</a>
                 </li>
             {% else %}
                 <li class="nav-item text-nowrap">
                     <a class="nav-link"
-                       href="{{ path('security_login') }}">Sign in</a>
+                       href="{{ path('security_login') }}">{{ 'Sign in'|trans }}</a>
                 </li>
             {% endif %}
         </ul>

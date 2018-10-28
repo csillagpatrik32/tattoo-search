@@ -20,9 +20,9 @@ class RegisterController extends Controller
      */
     public function register(
         UserPasswordEncoderInterface $passwordEncoder,
-        Request $request/*,
+        Request $request,
         EventDispatcherInterface $eventDispatcher,
-        TokenGenerator $tokenGenerator*/
+        TokenGenerator $tokenGenerator
     ){
         $user = new User();
         $form = $this->createForm(
@@ -37,18 +37,17 @@ class RegisterController extends Controller
                 $user->getPlainPassword()
             );
             $user->setPassword($password);
-            /*$user->setConfirmationToken($tokenGenerator->getRandomSecureToken(30));*/
+            $user->setConfirmationToken($tokenGenerator->getRandomSecureToken(30));
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
 
-            /*$userRegisterEvent = new UserRegisterEvent($user);
-
+            $userRegisterEvent = new UserRegisterEvent($user);
             $eventDispatcher->dispatch(
                 UserRegisterEvent::NAME,
                 $userRegisterEvent
-            );*/
+            );
 
             return $this->redirectToRoute('security_login');
         }

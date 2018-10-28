@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="hu" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="menu.signin">
+                <source>Sign in</source>
+                <target>Einloggen</target>
+            </trans-unit>
+            <trans-unit id="menu.signout">
+                <source>Sign out</source>
+                <target>Ausloggen</target>
+            </trans-unit>
+            <trans-unit id="menu.notifications">
+                <source>Notifications</source>
+                <target>Benachrichtigungen</target>
+            </trans-unit>
+            <trans-unit id="menu.add">
+                <source>Add new</source>
+                <target>Neue hinzufügen</target>
+            </trans-unit>
+            <trans-unit id="menu.some">
+                <source>Some function</source>
+                <target>Einige funktionieren</target>
+            </trans-unit>
+            <trans-unit id="post.recent">
+                <source>Recent updates</source>
+                <target>Neueste Updates</target>
+            </trans-unit>
+
+            <trans-unit id="login.remember">
+                <source>Remember me</source>
+                <target>Erinnere dich an mich</target>
+            </trans-unit>
+
+            <trans-unit id="register.terms">
+                <source>I agree to the terms of service</source>
+                <target>Ich stimme den Nutzungsbedingungen zu</target>
+            </trans-unit>
+            <trans-unit id="register.username">
+                <source>Username</source>
+                <target>Nutzername</target>
+            </trans-unit>
+            <trans-unit id="register.password">
+                <source>Password</source>
+                <target>Passwort</target>
+            </trans-unit>
+            <trans-unit id="register.repeated_password">
+                <source>Repated password</source>
+                <target>Wiederholtes Passwort</target>
+            </trans-unit>
+            <trans-unit id="register.full_name">
+                <source>Full name</source>
+                <target>Vollständiger Name</target>
+            </trans-unit>
+            <trans-unit id="register.register">
+                <source>Register</source>
+                <target>Registrieren</target>
+            </trans-unit>
+
+            <trans-unit id="notifications.none">
+                <source>You have no notifications</source>
+                <target>Sie haben keine Benachrichtigungen</target>
+            </trans-unit>
+
+            <trans-unit id="email.registration">
+                <source>email.registration</source>
+                <target><![CDATA[<h3>Willkommen in der App!</h3>
+<p>Hallo %name%! Sie haben sich in der %site_name% registriert!</p>
+<p>Bitte bestätigen Sie den Account, indem Sie auf diesen
+    <a href="%confirm-link%">Link</a> klicken.
+</p>
+<p>Um sich anzumelden, gehen <a href="%login-link%">Sie zur Anmeldeseite.</a>.</p>
+<p>Danke!</p>]]></target>
+            </trans-unit>
+
+            <trans-unit id="user.followers">
+                <source>Followers</source>
+                <target>Anhänger</target>
+            </trans-unit>
+
+            <trans-unit id="user.following">
+                <source>Following</source>
+                <target>Folgend</target>
+            </trans-unit>
+
+            <trans-unit id="index.welcome">
+                <source>Welcome to the </source>
+                <target>Willkommen auf der </target>
+            </trans-unit>
+            <trans-unit id="index.register">
+                <source>Register here</source>
+                <target>Hier registrieren</target>
+            </trans-unit>
+
+            <trans-unit id="profile.profile">
+                <source>Profile</source>
+                <target>Profil</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

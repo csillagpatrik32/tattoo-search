@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="hu" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="menu.signin">
+                <source>Sign in</source>
+                <target>Bejelentkezés</target>
+            </trans-unit>
+            <trans-unit id="menu.signout">
+                <source>Sign out</source>
+                <target>Kijelentkezés</target>
+            </trans-unit>
+            <trans-unit id="menu.notifications">
+                <source>Notifications</source>
+                <target>Értesítés</target>
+            </trans-unit>
+            <trans-unit id="menu.add">
+                <source>Add new</source>
+                <target>Új hozzáadása</target>
+            </trans-unit>
+            <trans-unit id="menu.some">
+                <source>Some function</source>
+                <target>Egy funkció</target>
+            </trans-unit>
+            <trans-unit id="post.recent">
+                <source>Recent updates</source>
+                <target>Legfrissebb bejegyzések</target>
+            </trans-unit>
+
+            <trans-unit id="login.remember">
+                <source>Remember me</source>
+                <target>Maradjak belépve</target>
+            </trans-unit>
+
+            <trans-unit id="register.terms">
+                <source>I agree to the terms of service</source>
+                <target>Elfogadom a felhasználási feltételeket</target>
+            </trans-unit>
+            <trans-unit id="register.username">
+                <source>Username</source>
+                <target>Felhasználónév</target>
+            </trans-unit>
+            <trans-unit id="register.password">
+                <source>Password</source>
+                <target>Jelszó</target>
+            </trans-unit>
+            <trans-unit id="register.repeated_password">
+                <source>Repated password</source>
+                <target>Jelszó ismét</target>
+            </trans-unit>
+            <trans-unit id="register.full_name">
+                <source>Full name</source>
+                <target>Teljes név</target>
+            </trans-unit>
+            <trans-unit id="register.register">
+                <source>Register</source>
+                <target>Regisztrálok</target>
+            </trans-unit>
+
+            <trans-unit id="notifications.none">
+                <source>You have no notifications</source>
+                <target>Nincsenek értesítések</target>
+            </trans-unit>
+
+            <trans-unit id="email.registration">
+                <source>email.registration</source>
+                <target><![CDATA[<h3>Üdv az oldalon!</h3>
+<p>Hello %name%! Regisztráltál a %site_name% oldalra!</p>
+<p>Kérlek, kattints a linkre, hogy megerősítsd a regisztrációdat
+    <a href="%confirm-link%">link</a>.
+</p>
+<p>A bejelentkezéshez menj <a href="%login-link%">erre az oldalra</a>.</p>
+<p>Köszi!</p>]]></target>
+            </trans-unit>
+
+            <trans-unit id="user.followers">
+                <source>Followers</source>
+                <target>{0} Nem követnek|{1} valaki követ|]1,Inf[ %count% felhasználó követ</target>
+            </trans-unit>
+            <trans-unit id="user.following">
+                <source>Following</source>
+                <target>{0} Nem követsz senkit|]0,Inf[ %count% felhasználót követsz</target>
+            </trans-unit>
+
+            <trans-unit id="index.welcome">
+                <source>Welcome to the </source>
+                <target>Üdvözöllek a </target>
+            </trans-unit>
+            <trans-unit id="index.register">
+                <source>Register here</source>
+                <target>Itt regisztrálhatsz</target>
+            </trans-unit>
+
+            <trans-unit id="profile.profile">
+                <source>Profile</source>
+                <target>Profil</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

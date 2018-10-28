@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\User;
+use App\Entity\UserPreferences;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -39,6 +40,12 @@ class AppFixtures extends Fixture
             'roles' => [User::ROLE_ADMIN]
         ],
     ];
+
+    private const LANGUAGES = [
+        'en',
+        'de',
+        'hu'
+    ];
     /**
      * @var UserPasswordEncoderInterface
      */
@@ -68,6 +75,12 @@ class AppFixtures extends Fixture
                 )
             );
             $user->setRoles($userData['roles']);
+            $user->setEnabled(true);
+
+            $preferences = new UserPreferences();
+            $preferences->setLocale((self::LANGUAGES[rand(0, 2)]));
+
+            $user->setPreferences($preferences);
 
             $manager->persist($user);
         }
