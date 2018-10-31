@@ -60,6 +60,6 @@ class DefaultController extends Controller
 
         $this->session->set('_locale', $lang);
 
-        return $this->redirectToRoute('index');
+        return $this->redirect($request->headers->get('referer'));
     }
 }

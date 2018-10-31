@@ -95,6 +95,10 @@
                 <source>Profile</source>
                 <target>Profil</target>
             </trans-unit>
+            <trans-unit id="profile.update">
+                <source>Profile update</source>
+                <target>Profil módosítás</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

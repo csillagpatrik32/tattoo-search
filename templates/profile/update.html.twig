@@ -4,5 +4,9 @@
 
 {% block body %}
     <h2>{{ 'Profile'|trans }}</h2>
-    <a href="{{ path('profile_update') }}">{{ 'Profile update'|trans }}</a>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+
 {% endblock %}
