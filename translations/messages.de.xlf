@@ -45,7 +45,7 @@
                 <target>Passwort</target>
             </trans-unit>
             <trans-unit id="register.repeated_password">
-                <source>Repated password</source>
+                <source>Repeated password</source>
                 <target>Wiederholtes Passwort</target>
             </trans-unit>
             <trans-unit id="register.full_name">
@@ -60,6 +60,23 @@
             <trans-unit id="notifications.none">
                 <source>You have no notifications</source>
                 <target>Sie haben keine Benachrichtigungen</target>
+            </trans-unit>
+
+            <trans-unit id="flashes.usernameused">
+                <source>This username is already used</source>
+                <target>Dieser Benutzername wird bereits verwendet</target>
+            </trans-unit>
+            <trans-unit id="flashes.emailused">
+                <source>This e-mail is already used</source>
+                <target>Diese E-Mail wird bereits verwendet</target>
+            </trans-unit>
+            <trans-unit id="flashes.profilesuccess">
+                <source>Your profile has been updated</source>
+                <target>Ihr Profil wurde aktualisiert</target>
+            </trans-unit>
+            <trans-unit id="flashes.passwordchange">
+                <source>Your password has changed</source>
+                <target>Ihr Passwort hat sich geändert</target>
             </trans-unit>
 
             <trans-unit id="email.registration">
@@ -99,6 +116,14 @@
             <trans-unit id="profile.update">
                 <source>Profile update</source>
                 <target>Profilaktualisierung</target>
+            </trans-unit>
+            <trans-unit id="profile.updatebtn">
+                <source>Update</source>
+                <target>Aktualisieren</target>
+            </trans-unit>
+            <trans-unit id="profile.passwordupdate">
+                <source>Password change</source>
+                <target>Passwortänderung</target>
             </trans-unit>
         </body>
     </file>

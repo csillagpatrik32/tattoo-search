@@ -6,6 +6,7 @@
 parameters:
     locale: 'en'
     site_name: 'Tattoo Search App'
+    title_separator: ' | '
     email_from: '%env(MAILER_FROM)%'
     languages: [en, de, hu]
 

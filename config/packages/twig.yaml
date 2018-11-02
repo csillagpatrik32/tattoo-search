@@ -5,5 +5,6 @@ twig:
     form_themes: ['bootstrap_4_layout.html.twig']
     globals:
         site_name: '%site_name%'
+        title_separator: '%title_separator%'
         languages: '%languages%'
 

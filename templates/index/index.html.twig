@@ -2,7 +2,7 @@
 
 {% block body %}
 
-    <h2>{{ 'Welcome to the '|trans ~ site_name }}!
+    <h2>{{ 'Welcome to the '|trans ~ site_name ~ ' oldalon'|trans}}!
         {% if is_granted('ROLE_USER') == false %}
             <br><a href="{{ path('user_register') }}">{{ 'Register here'|trans }}</a>
         {% endif %}

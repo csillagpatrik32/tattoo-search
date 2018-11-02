@@ -3,7 +3,7 @@
     <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
         <body>
             <trans-unit id="menu.signin">
-                <source>Signs in</source>
+                <source>Sign in</source>
                 <target>Sign in</target>
             </trans-unit>
             <trans-unit id="menu.signout">
@@ -45,8 +45,8 @@
                 <target>Password</target>
             </trans-unit>
             <trans-unit id="register.repeated_password">
-                <source>Repated password</source>
-                <target>Repated password</target>
+                <source>Repeated password</source>
+                <target>Repeated password</target>
             </trans-unit>
             <trans-unit id="register.full_name">
                 <source>Full name</source>
@@ -60,6 +60,23 @@
             <trans-unit id="notifications.none">
                 <source>You have not notifications</source>
                 <target>You have not notifications</target>
+            </trans-unit>
+
+            <trans-unit id="flashes.usernameused">
+                <source>This username is already used</source>
+                <target>This username is already used</target>
+            </trans-unit>
+            <trans-unit id="flashes.emailused">
+                <source>This e-mail is already used</source>
+                <target>This e-mail is already used</target>
+            </trans-unit>
+            <trans-unit id="flashes.profilesuccess">
+                <source>Your profile has been updated</source>
+                <target>Votre profil a été mis a jour</target>
+            </trans-unit>
+            <trans-unit id="flashes.passwordchange">
+                <source>Your password has changed</source>
+                <target>Your password has changed</target>
             </trans-unit>
 
             <trans-unit id="email.registration">
@@ -98,6 +115,14 @@
             <trans-unit id="profile.update">
                 <source>Profile update</source>
                 <target>Profile update</target>
+            </trans-unit>
+            <trans-unit id="profile.updatebtn">
+                <source>Update</source>
+                <target>Update</target>
+            </trans-unit>
+            <trans-unit id="profile.passwordupdate">
+                <source>Password change</source>
+                <target>Password change</target>
             </trans-unit>
         </body>
     </file>

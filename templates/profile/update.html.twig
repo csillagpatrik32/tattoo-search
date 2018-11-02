@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ 'Profile'|trans }} - {{ site_name }}{% endblock %}
+{% block title %}{{ 'Profile update'|trans ~ title_separator ~ site_name}}{% endblock %}
 
 {% block body %}
-    <h2>{{ 'Profile'|trans }}</h2>
+    <h2>{{ 'Profile update'|trans }}</h2>
 
     {{ form_start(form) }}
     {{ form_widget(form) }}

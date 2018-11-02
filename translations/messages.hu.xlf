@@ -22,6 +22,7 @@
                 <source>Some function</source>
                 <target>Egy funkció</target>
             </trans-unit>
+
             <trans-unit id="post.recent">
                 <source>Recent updates</source>
                 <target>Legfrissebb bejegyzések</target>
@@ -45,7 +46,7 @@
                 <target>Jelszó</target>
             </trans-unit>
             <trans-unit id="register.repeated_password">
-                <source>Repated password</source>
+                <source>Repeated password</source>
                 <target>Jelszó ismét</target>
             </trans-unit>
             <trans-unit id="register.full_name">
@@ -60,6 +61,23 @@
             <trans-unit id="notifications.none">
                 <source>You have no notifications</source>
                 <target>Nincsenek értesítések</target>
+            </trans-unit>
+
+            <trans-unit id="flashes.usernameused">
+                <source>This username is already used</source>
+                <target>Ez a felhasználónév foglalt</target>
+            </trans-unit>
+            <trans-unit id="flashes.emailused">
+                <source>This e-mail is already used</source>
+                <target>Ez az e-mail foglalt</target>
+            </trans-unit>
+            <trans-unit id="flashes.profilesuccess">
+                <source>Your profile has been updated</source>
+                <target>Sikeresen módosítottad a profilodat</target>
+            </trans-unit>
+            <trans-unit id="flashes.passwordchange">
+                <source>Your password has changed</source>
+                <target>Megváltozott a jelszavad</target>
             </trans-unit>
 
             <trans-unit id="email.registration">
@@ -86,6 +104,10 @@
                 <source>Welcome to the </source>
                 <target>Üdvözöllek a </target>
             </trans-unit>
+            <trans-unit id="index.welcomeadd">
+                <source> oldalon</source>
+                <target> oldalon</target>
+            </trans-unit>
             <trans-unit id="index.register">
                 <source>Register here</source>
                 <target>Itt regisztrálhatsz</target>
@@ -98,6 +120,14 @@
             <trans-unit id="profile.update">
                 <source>Profile update</source>
                 <target>Profil módosítás</target>
+            </trans-unit>
+            <trans-unit id="profile.updatebtn">
+                <source>Update</source>
+                <target>Módosítás</target>
+            </trans-unit>
+            <trans-unit id="profile.passwordupdate">
+                <source>Password change</source>
+                <target>Jelszó módosítás</target>
             </trans-unit>
         </body>
     </file>

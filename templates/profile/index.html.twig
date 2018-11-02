@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'Profile'|trans ~ title_separator ~ site_name }}{% endblock %}
+
+{% block body %}
+    <h2>{{ 'Profile'|trans }}</h2>
+    <a href="{{ path('profile_update') }}">{{ 'Profile update'|trans }}</a><br>
+    <a href="{{ path('profile_password') }}">{{ 'Password change'|trans }}</a>
+{% endblock %}
