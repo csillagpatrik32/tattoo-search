@@ -32,7 +32,8 @@ class UserSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            UserRegisterEvent::NAME => 'onUserRegister'
+            UserRegisterEvent::NAME => 'onUserRegister',
+            UserPasswordForgottenEvent::NAME => 'onUserPasswordForgotten'
         ];
     }
 
@@ -47,5 +48,10 @@ class UserSubscriber implements EventSubscriberInterface
         $this->entityManager->flush();
 
         $this->mailer->sendConfirmationEmail($event->getRegisteredUser());
+    }
+
+    public function onUserPasswordForgotten(UserPasswordForgottenEvent $event)
+    {
+        $this->mailer->sendPasswordResetEmail($event->getForgottenPasswordUser());
     }
 }

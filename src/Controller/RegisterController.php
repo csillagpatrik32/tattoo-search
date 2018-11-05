@@ -48,8 +48,9 @@ class RegisterController extends Controller
                 UserRegisterEvent::NAME,
                 $userRegisterEvent
             );
+            $this->addFlash('success', 'Please check your email');
 
-            return $this->redirectToRoute('security_login');
+            return $this->redirectToRoute('default');
         }
 
         return $this->render('register/register.html.twig', [

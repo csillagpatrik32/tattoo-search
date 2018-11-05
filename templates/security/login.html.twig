@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Login {{ title_separator ~ site_name}}{% endblock %}
+{% block title %}{{'Sign in'|trans ~ title_separator ~ site_name}}{% endblock %}
 
 {% block body %}
     {% if error %}
@@ -29,4 +29,5 @@
             <input type="hidden" name="_target_path" value="{{ app.request.get('redirect_to') }}">
         </div>
     </form>
+    <a href="{{ path('security_password_forgotten') }}"/>{{ 'Did you forget your password?'|trans }}</a>
 {% endblock %}

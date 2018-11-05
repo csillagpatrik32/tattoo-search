@@ -22,6 +22,7 @@
                 <source>Some function</source>
                 <target>Some function</target>
             </trans-unit>
+
             <trans-unit id="post.recent">
                 <source>Recent updates</source>
                 <target>Recent updates</target>
@@ -30,6 +31,10 @@
             <trans-unit id="login.remember">
                 <source>Remember me</source>
                 <target>Remember me</target>
+            </trans-unit>
+            <trans-unit id="login.forget">
+                <source>Did you forget your password?</source>
+                <target>Did you forget your password?</target>
             </trans-unit>
 
             <trans-unit id="register.terms">
@@ -57,26 +62,59 @@
                 <target>Register</target>
             </trans-unit>
 
-            <trans-unit id="notifications.none">
-                <source>You have not notifications</source>
-                <target>You have not notifications</target>
+            <trans-unit id="password.forgotten">
+                <source>Password forgotten</source>
+                <target>Password forgotten</target>
+            </trans-unit>
+            <trans-unit id="password.submit">
+                <source>Submit</source>
+                <target>Submit</target>
+            </trans-unit>
+            <trans-unit id="password.reset">
+                <source>Password reset</source>
+                <target>Password reset</target>
             </trans-unit>
 
-            <trans-unit id="flashes.usernameused">
-                <source>This username is already used</source>
-                <target>This username is already used</target>
+            <trans-unit id="notifications.none">
+                <source>You have no notifications</source>
+                <target>You have no notifications</target>
             </trans-unit>
-            <trans-unit id="flashes.emailused">
-                <source>This e-mail is already used</source>
-                <target>This e-mail is already used</target>
-            </trans-unit>
+
             <trans-unit id="flashes.profilesuccess">
                 <source>Your profile has been updated</source>
-                <target>Votre profil a été mis a jour</target>
+                <target>Your profile has been updated</target>
             </trans-unit>
             <trans-unit id="flashes.passwordchange">
                 <source>Your password has changed</source>
                 <target>Your password has changed</target>
+            </trans-unit>
+            <trans-unit id="flashes.password_email">
+                <source>Please check your email</source>
+                <target>Please check your email</target>
+            </trans-unit>
+            <trans-unit id="flashes.reset_wrong_token">
+                <source>Something went wrong. Please check your email.</source>
+                <target>Something went wrong. Please check your email.</target>
+            </trans-unit>
+            <trans-unit id="password.email_not_found">
+                <source>This email was not found</source>
+                <target>This email was not found</target>
+            </trans-unit>
+            <trans-unit id="flashes.password_reset_token_not_available">
+                <source>This token is no longer available. Please reset your password again.</source>
+                <target>This token is no longer available. Please reset your password again.</target>
+            </trans-unit>
+            <trans-unit id="flashes.oops">
+                <source>Oops</source>
+                <target>Oops</target>
+            </trans-unit>
+            <trans-unit id="flashes.wrong">
+                <source>Something went wrong.</source>
+                <target>Something went wrong.</target>
+            </trans-unit>
+            <trans-unit id="flashes.back">
+                <source>Back to the main page.</source>
+                <target>Back to the main page.</target>
             </trans-unit>
 
             <trans-unit id="email.registration">
@@ -87,6 +125,17 @@
     <a href="%confirm-link%">link</a>.
 </p>
 <p>To login, go to <a href="%login-link%">login page</a>.</p>
+<p>Thanks!</p>]]></target>
+            </trans-unit>
+            <trans-unit id="email.password_reset">
+                <source>email.password_reset</source>
+                <target><![CDATA[<h3>Hello %name%!</h3>
+<p>We have received a password reset request on the %site_name%.</p>
+<p>If you want to reset your account please click on this
+    <a href="%confirm-link%">link</a>.
+</p>
+<p>The link expires in 24 hours.</p>
+<p>If you did not initiate this request then please ignore this message.
 <p>Thanks!</p>]]></target>
             </trans-unit>
 
@@ -123,6 +172,18 @@
             <trans-unit id="profile.passwordupdate">
                 <source>Password change</source>
                 <target>Password change</target>
+            </trans-unit>
+            <trans-unit id="profile.current_password">
+                <source>Current password</source>
+                <target>Current password</target>
+            </trans-unit>
+            <trans-unit id="profile.new_password">
+                <source>New password</source>
+                <target>New password</target>
+            </trans-unit>
+            <trans-unit id="profile.new_repeated_password">
+                <source>New repeated password</source>
+                <target>New repeated password</target>
             </trans-unit>
         </body>
     </file>

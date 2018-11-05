@@ -8,10 +8,12 @@ use App\Form\UserPasswordChange;
 use App\Form\UserUpdate;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * @Security("is_granted('ROLE_USER')")
@@ -22,21 +24,31 @@ class UserController extends Controller
     /**
      * @Route("/", name="profile")
      */
-    public function profile(Request $request)
+    public function profile()
     {
         $user = $this->getUser();
 
-        $html = $this->renderView('profile/index.html.twig', [
-            'user' => $user
-        ]);
+        $profileData = [
+            'Username' => $user->getUsername(),
+            'Email' => $user->getEmail(),
+            'Full name' => $user->getFullName()
+        ];
 
-        return new Response($html);
+        return new Response($this->renderView(
+            'profile/index.html.twig', [
+                'user' => $user,
+                'profileData' => $profileData
+            ])
+        );
     }
 
     /**
      * @Route("/update", name="profile_update")
      */
-    public function profileUpdate(Request $request)
+    public function profileUpdate(
+        Request $request,
+        TranslatorInterface $translator
+    )
     {
         /** @var User $user */
         $user = $this->getUser();
@@ -58,37 +70,45 @@ class UserController extends Controller
                 ->getRepository(User::class)
                 ->findOneBy(['username' => $username]);
             if ($usernameCheck !== null and $username !== $user->getUsername()) {
-                $this->addFlash('danger', 'This username is already used');
+                $form->get('username')->addError(
+                    new FormError(
+                        $translator->trans('This username is already used', [], 'validators')
+                    )
+                );
+            } else {
+                $user->setUsername($username);
+                $user->setFullName($fullName);
+
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($user);
+                $entityManager->flush();
+                $this->addFlash('success', 'Your profile has been updated');
+
                 return $this->redirectToRoute('profile');
             }
-
-            $user->setUsername($username);
-            $user->setFullName($fullName);
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
-            $this->addFlash('success', 'Your profile has been updated');
-
-            return $this->redirectToRoute('profile');
         }
 
-        $html = $this->renderView('profile/update.html.twig', [
-            'form' => $form->createView()
-        ]);
-
-        return new Response($html);
+        return new Response($this->renderView(
+            'profile/update.html.twig', [
+                'form' => $form->createView()
+            ])
+        );
     }
 
     /**
      * @Route("/password-change", name="profile_password")
      */
-    public function passwordChange(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function passwordChange(
+        Request $request,
+        UserPasswordEncoderInterface $passwordEncoder
+    )
     {
-        /** @var User $user */
+        /**
+         * @var User $user
+         */
         $user = $this->getUser();
 
-        $formData = ['plainPassword' => ''];
+        $formData = ['oldPassword' => '', 'plainPassword' => ''];
 
         $form = $this->createForm(
             UserPasswordChange::class,
@@ -114,10 +134,10 @@ class UserController extends Controller
             return $this->redirectToRoute('profile');
         }
 
-        $html = $this->renderView('profile/password-change.html.twig', [
-            'form' => $form->createView()
-        ]);
-
-        return new Response($html);
+        return new Response($this->renderView(
+            'profile/password-change.html.twig', [
+                'form' => $form->createView()
+            ])
+        );
     }
 }

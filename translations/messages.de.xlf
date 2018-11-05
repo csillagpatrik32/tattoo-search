@@ -22,6 +22,7 @@
                 <source>Some function</source>
                 <target>Einige funktionieren</target>
             </trans-unit>
+
             <trans-unit id="post.recent">
                 <source>Recent updates</source>
                 <target>Neueste Updates</target>
@@ -30,6 +31,10 @@
             <trans-unit id="login.remember">
                 <source>Remember me</source>
                 <target>Erinnere dich an mich</target>
+            </trans-unit>
+            <trans-unit id="login.forget">
+                <source>Did you forget your password?</source>
+                <target>Haben Sie Ihr Passwort vergessen?</target>
             </trans-unit>
 
             <trans-unit id="register.terms">
@@ -57,19 +62,24 @@
                 <target>Registrieren</target>
             </trans-unit>
 
+            <trans-unit id="password.forgotten">
+                <source>Password forgotten</source>
+                <target>Passwort vergessen</target>
+            </trans-unit>
+            <trans-unit id="password.submit">
+                <source>Submit</source>
+                <target>Einreichen</target>
+            </trans-unit>
+            <trans-unit id="password.reset">
+                <source>Password reset</source>
+                <target>Passwort zurücksetzen</target>
+            </trans-unit>
+
             <trans-unit id="notifications.none">
                 <source>You have no notifications</source>
                 <target>Sie haben keine Benachrichtigungen</target>
             </trans-unit>
 
-            <trans-unit id="flashes.usernameused">
-                <source>This username is already used</source>
-                <target>Dieser Benutzername wird bereits verwendet</target>
-            </trans-unit>
-            <trans-unit id="flashes.emailused">
-                <source>This e-mail is already used</source>
-                <target>Diese E-Mail wird bereits verwendet</target>
-            </trans-unit>
             <trans-unit id="flashes.profilesuccess">
                 <source>Your profile has been updated</source>
                 <target>Ihr Profil wurde aktualisiert</target>
@@ -77,6 +87,34 @@
             <trans-unit id="flashes.passwordchange">
                 <source>Your password has changed</source>
                 <target>Ihr Passwort hat sich geändert</target>
+            </trans-unit>
+            <trans-unit id="flashes.password_email">
+                <source>Please check your email</source>
+                <target>Bitte überprüfen Sie Ihre Email</target>
+            </trans-unit>
+            <trans-unit id="flashes.reset_wrong_token">
+                <source>Something went wrong. Please check your email.</source>
+                <target>Etwas ist schief gelaufen. Bitte überprüfen Sie Ihre Email.</target>
+            </trans-unit>
+            <trans-unit id="password.email_not_found">
+                <source>This email was not found</source>
+                <target>Diese E-Mail wurde nicht gefunden</target>
+            </trans-unit>
+            <trans-unit id="flashes.password_reset_token_not_available">
+                <source>This token is no longer available. Please reset your password again.</source>
+                <target>Dieses Token ist nicht mehr verfügbar. Bitte setzen Sie Ihr Passwort erneut zurück.</target>
+            </trans-unit>
+            <trans-unit id="flashes.oops">
+                <source>Oops</source>
+                <target>Oops</target>
+            </trans-unit>
+            <trans-unit id="flashes.wrong">
+                <source>Something went wrong.</source>
+                <target>Etwas ist schief gelaufen.</target>
+            </trans-unit>
+            <trans-unit id="flashes.back">
+                <source>Back to the main page.</source>
+                <target>Zurück zur Hauptseite.</target>
             </trans-unit>
 
             <trans-unit id="email.registration">
@@ -87,6 +125,17 @@
     <a href="%confirm-link%">Link</a> klicken.
 </p>
 <p>Um sich anzumelden, gehen <a href="%login-link%">Sie zur Anmeldeseite.</a>.</p>
+<p>Danke!</p>]]></target>
+            </trans-unit>
+            <trans-unit id="email.password_reset">
+                <source>email.password_reset</source>
+                <target><![CDATA[<h3>Hallo %name%!</h3>
+<p>Wir haben eine Anfrage zum Zurücksetzen des Passworts in der %site_name%.</p>
+<p>Wenn Sie Ihr Konto zurücksetzen möchten, klicken Sie bitte auf diesen
+    <a href="%confirm-link%">Link</a>.
+</p>
+<p>Die Verbindung läuft in 24 Stunden ab.</p>
+<p>Wenn Sie diese Anfrage nicht initiiert haben, ignorieren Sie diese Nachricht bitte.
 <p>Danke!</p>]]></target>
             </trans-unit>
 
@@ -124,6 +173,18 @@
             <trans-unit id="profile.passwordupdate">
                 <source>Password change</source>
                 <target>Passwortänderung</target>
+            </trans-unit>
+            <trans-unit id="profile.current_password">
+                <source>Current password</source>
+                <target>Derzeitiges Passwort</target>
+            </trans-unit>
+            <trans-unit id="profile.new_password">
+                <source>New password</source>
+                <target>Neues Kennwort</target>
+            </trans-unit>
+            <trans-unit id="profile.new_repeated_password">
+                <source>New repeated password</source>
+                <target>Neues Passwort wiederholt</target>
             </trans-unit>
         </body>
     </file>

@@ -10,6 +10,11 @@
                 <source>This username is already used</source>
                 <target>Ce nom d'utilisateur est déjà utilisé</target>
             </trans-unit>
+
+            <trans-unit id="forgotten.email_not_found">
+                <source>This email is not found</source>
+                <target>Cet email n'est pas trouvé</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

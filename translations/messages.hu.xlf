@@ -32,6 +32,10 @@
                 <source>Remember me</source>
                 <target>Maradjak belépve</target>
             </trans-unit>
+            <trans-unit id="login.forget">
+                <source>Did you forget your password?</source>
+                <target>Elfelejtetted a jelszavadat?</target>
+            </trans-unit>
 
             <trans-unit id="register.terms">
                 <source>I agree to the terms of service</source>
@@ -58,19 +62,24 @@
                 <target>Regisztrálok</target>
             </trans-unit>
 
+            <trans-unit id="password.forgotten">
+                <source>Password forgotten</source>
+                <target>Elfelejtett jelszó</target>
+            </trans-unit>
+            <trans-unit id="password.submit">
+                <source>Submit</source>
+                <target>Küldés</target>
+            </trans-unit>
+            <trans-unit id="password.reset">
+                <source>Password reset</source>
+                <target>Jelszó visszaállítás</target>
+            </trans-unit>
+
             <trans-unit id="notifications.none">
                 <source>You have no notifications</source>
                 <target>Nincsenek értesítések</target>
             </trans-unit>
 
-            <trans-unit id="flashes.usernameused">
-                <source>This username is already used</source>
-                <target>Ez a felhasználónév foglalt</target>
-            </trans-unit>
-            <trans-unit id="flashes.emailused">
-                <source>This e-mail is already used</source>
-                <target>Ez az e-mail foglalt</target>
-            </trans-unit>
             <trans-unit id="flashes.profilesuccess">
                 <source>Your profile has been updated</source>
                 <target>Sikeresen módosítottad a profilodat</target>
@@ -78,6 +87,34 @@
             <trans-unit id="flashes.passwordchange">
                 <source>Your password has changed</source>
                 <target>Megváltozott a jelszavad</target>
+            </trans-unit>
+            <trans-unit id="flashes.password_email">
+                <source>Please check your email</source>
+                <target>Nézd meg az email fiókodat</target>
+            </trans-unit>
+            <trans-unit id="flashes.reset_wrong_token">
+                <source>Something went wrong. Please check your email.</source>
+                <target>Valami nem jó. Ellenőrizd az email fiókodat.</target>
+            </trans-unit>
+            <trans-unit id="password.email_not_found">
+                <source>This email was not found</source>
+                <target>Ez az email nem található</target>
+            </trans-unit>
+            <trans-unit id="flashes.password_reset_token_not_available">
+                <source>This token is no longer available. Please reset your password again.</source>
+                <target>Ez a link már nem elérhető. Próbáld meg még egyszer a jelszó visszaállítást.</target>
+            </trans-unit>
+            <trans-unit id="flashes.oops">
+                <source>Oops</source>
+                <target>Hoppá</target>
+            </trans-unit>
+            <trans-unit id="flashes.wrong">
+                <source>Something went wrong.</source>
+                <target>Valami nem jó.</target>
+            </trans-unit>
+            <trans-unit id="flashes.back">
+                <source>Back to the main page.</source>
+                <target>Vissza a kezdőlapra.</target>
             </trans-unit>
 
             <trans-unit id="email.registration">
@@ -88,6 +125,17 @@
     <a href="%confirm-link%">link</a>.
 </p>
 <p>A bejelentkezéshez menj <a href="%login-link%">erre az oldalra</a>.</p>
+<p>Köszi!</p>]]></target>
+            </trans-unit>
+            <trans-unit id="email.password_reset">
+                <source>email.password_reset</source>
+                <target><![CDATA[<h3>Hello %name%!</h3>
+<p>Kaptunk egy jelszó visszaállítási kérést a %site_name% oldalon.</p>
+<p>Ha vissza akarod állítani a jelszavadat, akkor kattints erre a
+    <a href="%confirm-link%">linkre</a>.
+</p>
+<p>A link 24 órán belül lejár.</p>
+<p>Ha nem te kezdeményezted ezt a kérést, akkor kérlek hagyd figyelmen kívül ezt az üzenetet.
 <p>Köszi!</p>]]></target>
             </trans-unit>
 
@@ -128,6 +176,18 @@
             <trans-unit id="profile.passwordupdate">
                 <source>Password change</source>
                 <target>Jelszó módosítás</target>
+            </trans-unit>
+            <trans-unit id="profile.current_password">
+                <source>Current password</source>
+                <target>Jelenlegi jelszó</target>
+            </trans-unit>
+            <trans-unit id="profile.new_password">
+                <source>New password</source>
+                <target>Új jelszó</target>
+            </trans-unit>
+            <trans-unit id="profile.new_repeated_password">
+                <source>New repeated password</source>
+                <target>Új jelszó ismét</target>
             </trans-unit>
         </body>
     </file>

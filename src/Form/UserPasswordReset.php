@@ -11,19 +11,12 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
 
-class UserPasswordChange extends AbstractType
+class UserPasswordReset extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('currentPassword', PasswordType::class, [
-                'label' => 'Current password',
-                'constraints' => [
-                    new SecurityAssert\UserPassword()
-                ]
-            ])
-            ->add('plainPassword', RepeatedType::class, [
+        $builder->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'first_options' => ['label' => 'New password'],
                 'second_options' => ['label' => 'New repeated password'],

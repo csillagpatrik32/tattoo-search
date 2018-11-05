@@ -62,4 +62,14 @@ class DefaultController extends Controller
 
         return $this->redirect($request->headers->get('referer'));
     }
+
+    /**
+     * @Route("/default", name="default")
+     */
+    public function default()
+    {
+        $html = $this->renderView('index/default.html.twig');
+
+        return new Response($html);
+    }
 }

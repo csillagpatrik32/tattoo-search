@@ -4,11 +4,16 @@
         <body>
             <trans-unit id="register.emailused">
                 <source>This e-mail is already used</source>
-                <target>Diese E-Mail wird bereits verwendet</target>
+                <target>Diese Email wird bereits verwendet</target>
             </trans-unit>
             <trans-unit id="register.usernameused">
                 <source>This username is already used</source>
                 <target>Dieser Benutzername wird bereits verwendet</target>
+            </trans-unit>
+
+            <trans-unit id="forgotten.email_not_found">
+                <source>This email is not found</source>
+                <target>Diese Email wird nicht gefunden</target>
             </trans-unit>
         </body>
     </file>

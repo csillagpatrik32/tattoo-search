@@ -62,6 +62,16 @@ class User implements AdvancedUserInterface, \Serializable
     private $confirmationToken;
 
     /**
+     * @ORM\Column(type="string", nullable=true, length=30)
+     */
+    private $passwordResetToken;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $passwordResetTime;
+
+    /**
      * @ORM\Column(type="boolean")
      */
     private $enabled;
@@ -271,5 +281,37 @@ class User implements AdvancedUserInterface, \Serializable
     public function setEnabled($enabled): void
     {
         $this->enabled = $enabled;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPasswordResetToken()
+    {
+        return $this->passwordResetToken;
+    }
+
+    /**
+     * @param mixed $passwordResetToken
+     */
+    public function setPasswordResetToken($passwordResetToken): void
+    {
+        $this->passwordResetToken = $passwordResetToken;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPasswordResetTime()
+    {
+        return $this->passwordResetTime;
+    }
+
+    /**
+     * @param mixed $passwordResetTime
+     */
+    public function setPasswordResetTime($passwordResetTime): void
+    {
+        $this->passwordResetTime = $passwordResetTime;
     }
 }

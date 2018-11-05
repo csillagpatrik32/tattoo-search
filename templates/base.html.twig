@@ -58,12 +58,13 @@
 
 <main role="main" class="container">
     <div class="my-3 p-3 bg-white rounded box-shadow">
-
+        {% set message_count = 0 %}
         {% for label, messages in app.flashes %}
             {% for message in messages %}
                 <div class="alert alert-{{ label }}">
                     {{ message|trans }}
                 </div>
+                {% set message_count = message_count + 1 %}
             {% endfor %}
         {% endfor %}
 

@@ -8,7 +8,12 @@
             </trans-unit>
             <trans-unit id="register.usernameused">
                 <source>This username is already used</source>
-                <target>Ez a felhasználónév foglalt2</target>
+                <target>Ez a felhasználónév foglalt</target>
+            </trans-unit>
+
+            <trans-unit id="forgotten.email_not_found">
+                <source>This email is not found</source>
+                <target>Ez az email nem található</target>
             </trans-unit>
         </body>
     </file>

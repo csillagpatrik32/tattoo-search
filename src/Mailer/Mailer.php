@@ -44,4 +44,19 @@ class Mailer
 
         $this->mailer->send($message);
     }
+
+    public function sendPasswordResetEmail(User $user)
+    {
+        $body = $this->twig->render('email/password-reset.html.twig', [
+            'user' => $user
+        ]);
+
+        $message = (new \Swift_Message())
+            ->setSubject('Password reset!')
+            ->setFrom($this->mailFrom)
+            ->setTo($user->getEmail())
+            ->setBody($body, 'text/html');
+
+        $this->mailer->send($message);
+    }
 }
