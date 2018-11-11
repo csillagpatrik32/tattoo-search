@@ -86,6 +86,11 @@ class User implements AdvancedUserInterface, \Serializable
      */
     private $preferences;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Studio", mappedBy="owner")
+     */
+    private $studio;
+
     public function __construct()
     {
         $this->roles = [self::ROLE_USER];
@@ -313,5 +318,21 @@ class User implements AdvancedUserInterface, \Serializable
     public function setPasswordResetTime($passwordResetTime): void
     {
         $this->passwordResetTime = $passwordResetTime;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStudio()
+    {
+        return $this->studio;
+    }
+
+    /**
+     * @param mixed $studio
+     */
+    public function setStudio($studio): void
+    {
+        $this->studio = $studio;
     }
 }

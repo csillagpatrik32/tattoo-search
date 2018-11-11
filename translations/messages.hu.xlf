@@ -32,6 +32,10 @@
                 <source>Remember me</source>
                 <target>Maradjak belépve</target>
             </trans-unit>
+            <trans-unit id="login.register">
+                <source>Not a member yet?</source>
+                <target>Nem vagy még tag?</target>
+            </trans-unit>
             <trans-unit id="login.forget">
                 <source>Did you forget your password?</source>
                 <target>Elfelejtetted a jelszavadat?</target>
@@ -188,6 +192,19 @@
             <trans-unit id="profile.new_repeated_password">
                 <source>New repeated password</source>
                 <target>Új jelszó ismét</target>
+            </trans-unit>
+
+            <trans-unit id="search.search">
+                <source>Search</source>
+                <target>Keresés</target>
+            </trans-unit>
+            <trans-unit id="search.city">
+                <source>City</source>
+                <target>Város</target>
+            </trans-unit>
+            <trans-unit id="search.style">
+                <source>Style</source>
+                <target>Stílus</target>
             </trans-unit>
         </body>
     </file>

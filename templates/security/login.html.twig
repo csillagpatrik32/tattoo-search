@@ -29,5 +29,7 @@
             <input type="hidden" name="_target_path" value="{{ app.request.get('redirect_to') }}">
         </div>
     </form>
+    <a href="{{ path('user_register') }}"/>{{ 'Not a member yet?'|trans }}</a><br />
+    <hr>
     <a href="{{ path('security_password_forgotten') }}"/>{{ 'Did you forget your password?'|trans }}</a>
 {% endblock %}

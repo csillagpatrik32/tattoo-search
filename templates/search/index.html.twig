@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h2>{{ 'Search'|trans}}</h2>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+
+    </div>
+    <div class="my-3 p-3 bg-white rounded box-shadow">
+
+    {% if studios %}
+        {% for studio in studios %}
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ studio.name }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ studio.address.0.city ~ ' | ' ~ studio.address.0.country }}</h6>
+                    <p class="card-text">Example studio short description.</p>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        {{ 'No result found'|trans }}
+    {% endif %}
+
+{% endblock %}

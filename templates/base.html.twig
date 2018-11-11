@@ -14,11 +14,13 @@
        href="{{ path('index') }}">Tattoo Search App</a>
     <div class="w-100 order-1 order-md-0">
         <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
             {% if is_granted('ROLE_USER') %}
-                <li class="nav-item text-nowrap">
-                    <a class="nav-link" href="">{{ 'Some function'|trans }}</a>
-                </li>
+                <a class="nav-link" href="">{{ 'Some function'|trans }}</a>
+            {% else %}
+                <a class="nav-link" href="{{ path('user_register') }}">{{ 'Register'|trans }}</a>
             {% endif %}
+            </li>
         </ul>
     </div>
 

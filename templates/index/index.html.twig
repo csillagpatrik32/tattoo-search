@@ -2,10 +2,18 @@
 
 {% block body %}
 
-    <h2>{{ 'Welcome to the '|trans ~ site_name ~ ' oldalon'|trans}}!
+    <h2>
+        {{ 'Welcome to the '|trans ~ site_name ~ ' oldalon'|trans}}!
         {% if is_granted('ROLE_USER') == false %}
             <br><a href="{{ path('user_register') }}">{{ 'Register here'|trans }}</a>
         {% endif %}
-            </h2>
+    </h2>
+    </div>
+    <div class="my-3 p-3 bg-white rounded box-shadow">
+    <h2>{{ 'Search'|trans }}</h2>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+
 
 {% endblock %}

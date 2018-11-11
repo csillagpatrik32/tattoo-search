@@ -3,20 +3,21 @@
 namespace App\Controller;
 
 use App\Entity\Address;
+use App\Entity\Studio;
 use App\Entity\Style;
 use App\Form\StudioSearch;
+use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
- * @Route("/")
+ * @Route("/search")
  */
-class DefaultController extends Controller
+class SearchController extends Controller
 {
     /**
      * @var SessionInterface
@@ -38,10 +39,13 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/", name="index")
+     * @Route("/", name="search")
      */
-    public function index(Request $request)
+    public function search(Request $request)
     {
+        $address = new Address();
+        $style = new Style();
+
         $formData = [];
 
         if ($formData = $this->session->get('formData')) {
@@ -50,6 +54,8 @@ class DefaultController extends Controller
                     $formData[$key] = $this->entityManager->merge($data);
                 }
             }
+            $address = $formData['city'];
+            $style = $formData['style'];
         }
 
         $form = $this->createForm(
@@ -62,44 +68,21 @@ class DefaultController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $formData = $form->getData();
 
-            $this->session->set('formData', $formData);
+            $address = $formData['city'];
+            $style = $formData['style'];
 
-            return $this->redirectToRoute('search');
+            $this->session->set('formData', $formData);
         }
+
+        $studios = $this->getDoctrine()
+            ->getRepository(Studio::class)
+            ->findByCityAndStyle($address->getCity(), $style->getName());
 
         return new Response(
-            $this->renderView('index/index.html.twig', [
-                'form' => $form->createView()
+            $this->renderView('search/index.html.twig', [
+                'form' => $form->createView(),
+                'studios' => $studios,
             ])
         );
-    }
-
-    /**
-     * @Route("/change-language/{lang}", name="change_lang")
-     */
-    public function changeLanguage(string $lang, Request $request)
-    {
-        /** @var User $user */
-        $user = $this->getUser();
-
-        if ($this->isGranted('ROLE_USER'))
-        {
-            $user->getPreferences()->setLocale($lang);
-            $this->entityManager->flush();
-        }
-
-        $this->session->set('_locale', $lang);
-
-        return $this->redirect($request->headers->get('referer'));
-    }
-
-    /**
-     * @Route("/default", name="default")
-     */
-    public function default()
-    {
-        $html = $this->renderView('index/default.html.twig');
-
-        return new Response($html);
     }
 }

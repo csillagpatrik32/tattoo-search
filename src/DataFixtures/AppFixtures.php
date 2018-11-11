@@ -2,6 +2,9 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Address;
+use App\Entity\Studio;
+use App\Entity\Style;
 use App\Entity\User;
 use App\Entity\UserPreferences;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -11,6 +14,20 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class AppFixtures extends Fixture
 {
     private const USERS = [
+        [
+            'username' => 'super_admin',
+            'email' => 'super_admin@admin.com',
+            'password' => 'admin1234',
+            'fullName' => 'Super Admin',
+            'roles' => [User::ROLE_ADMIN]
+        ],
+        [
+            'username' => 'test',
+            'email' => 'test@test.com',
+            'password' => 'password123',
+            'fullName' => 'Test Account',
+            'roles' => [User::ROLE_USER]
+        ],
         [
             'username' => 'john_doe',
             'email' => 'john_doe@doe.com',
@@ -32,13 +49,6 @@ class AppFixtures extends Fixture
             'fullName' => 'Marry Gold',
             'roles' => [User::ROLE_USER]
         ],
-        [
-            'username' => 'super_admin',
-            'email' => 'super_admin@admin.com',
-            'password' => 'admin1234',
-            'fullName' => 'Micro Admin',
-            'roles' => [User::ROLE_ADMIN]
-        ],
     ];
 
     private const LANGUAGES = [
@@ -46,6 +56,58 @@ class AppFixtures extends Fixture
         'de',
         'hu'
     ];
+
+    private const STUDIOS = [
+        [
+            'owner_id' => 0,
+            'name' => 'Test München Tattoo Studio',
+            'style_id' => [0, 1, 2, 3],
+        ],
+        [
+            'owner_id' => 1,
+            'name' => 'Test Hamburg Tattoo Studio',
+            'style_id' => [0, 1, 3],
+        ],
+        [
+            'owner_id' => 2,
+            'name' => 'John Tattoo Studio',
+            'style_id' => [0, 1],
+        ],
+    ];
+
+    private const ADDRESSES = [
+        [
+            'studio_id' => 0,
+            'country' => 'Germany',
+            'city' => 'München',
+        ],
+        [
+            'studio_id' => 1,
+            'country' => 'Germany',
+            'city' => 'Hamburg',
+        ],
+        [
+            'studio_id' => 2,
+            'country' => 'Hungary',
+            'city' => 'Budapest',
+        ],
+    ];
+
+    private const STYLES = [
+        [
+            'name' => 'Minimalist'
+        ],
+        [
+            'name' => 'Geometric'
+        ],
+        [
+            'name' => 'Line'
+        ],
+        [
+            'name' => 'Dotwork'
+        ],
+    ];
+
     /**
      * @var UserPasswordEncoderInterface
      */
@@ -59,6 +121,9 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $this->loadUsers($manager);
+        $this->loadStyles($manager);
+        $this->loadStudios($manager);
+        $this->loadAddresses($manager);
     }
 
     private function loadUsers(ObjectManager $manager)
@@ -77,6 +142,11 @@ class AppFixtures extends Fixture
             $user->setRoles($userData['roles']);
             $user->setEnabled(true);
 
+            $this->addReference(
+                $userData['username'],
+                $user
+            );
+
             $preferences = new UserPreferences();
             $preferences->setLocale((self::LANGUAGES[rand(0, 2)]));
 
@@ -84,6 +154,67 @@ class AppFixtures extends Fixture
 
             $manager->persist($user);
         }
+        $manager->flush();
+    }
+
+    private function loadStudios(ObjectManager $manager)
+    {
+        foreach (self::STUDIOS as $studioData) {
+            $studio = new Studio();
+            $studio->setName($studioData['name']);
+
+            $studio->setOwner($this->getReference(
+                self::USERS[$studioData['owner_id']]['username']
+            ));
+
+            foreach ($studioData['style_id'] as $styleData) {
+                $studio->addStyle($this->getReference(
+                    self::STYLES[$styleData]['name']
+                ));
+            }
+
+            $this->addReference(
+                $studioData['name'],
+                $studio
+            );
+
+            $manager->persist($studio);
+        }
+
+        $manager->flush();
+    }
+
+    private function loadAddresses(ObjectManager $manager)
+    {
+        foreach (self::ADDRESSES as $addressData) {
+            $address = new Address();
+            $address->setStudio($this->getReference(
+                self::STUDIOS[$addressData['studio_id']]['name']
+            ));
+
+            $address->setCountry($addressData['country']);
+            $address->setCity($addressData['city']);
+
+            $manager->persist($address);
+        }
+
+        $manager->flush();
+    }
+
+    private function loadStyles(ObjectManager $manager)
+    {
+        foreach (self::STYLES as $styleData) {
+            $style = new Style();
+            $style->setName($styleData['name']);
+
+            $this->addReference(
+                $styleData['name'],
+                $style
+            );
+
+            $manager->persist($style);
+        }
+
         $manager->flush();
     }
 }

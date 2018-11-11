@@ -31,6 +31,10 @@
                 <source>Remember me</source>
                 <target>Souviens-toi de moi</target>
             </trans-unit>
+            <trans-unit id="login.register">
+                <source>Not a member yet?</source>
+                <target>Pas encore membre?</target>
+            </trans-unit>
             <trans-unit id="login.forget">
                 <source>Did you forget your password?</source>
                 <target>Avez-vous oublié votre mot de passe?</target>
@@ -174,6 +178,19 @@
             <trans-unit id="profile.new_repeated_password">
                 <source>New repeated password</source>
                 <target>Nouveau mot de passe répété</target>
+            </trans-unit>
+
+            <trans-unit id="search.search">
+                <source>Search</source>
+                <target>Chercher</target>
+            </trans-unit>
+            <trans-unit id="search.city">
+                <source>City</source>
+                <target>Ville</target>
+            </trans-unit>
+            <trans-unit id="search.style">
+                <source>Style</source>
+                <target>Style</target>
             </trans-unit>
         </body>
     </file>
