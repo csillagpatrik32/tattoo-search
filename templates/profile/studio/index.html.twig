@@ -1,0 +1,21 @@
+{% extends 'profile/layout.html.twig' %}
+
+{% block title %}{{'Studios'|trans ~ title_separator ~ site_name }}{% endblock %}
+
+{% block content %}
+    <h2>{{ 'Studios'|trans }}</h2>
+
+    {% if studioData %}
+        {% for studio in studioData %}
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ studio.Name }}</h5>
+                    <p class="card-text">{{ 'Address'|trans }}: {{ studio.Address }}</p>
+                    <p class="card-text">{{ 'Styles'|trans }}: {{ studio.Styles }}</p>
+                    <!--<a href="#" class="card-link">Link</a>-->
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+{% endblock %}

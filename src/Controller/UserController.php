@@ -26,34 +26,41 @@ class UserController extends Controller
      */
     public function profile()
     {
+        /**
+         * @var User $user
+         */
         $user = $this->getUser();
 
         $profileData = [
             'Username' => $user->getUsername(),
             'Email' => $user->getEmail(),
-            'Full name' => $user->getFullName()
+            'Full name' => $user->getFullName(),
+            'Studio' => implode(', ', $user->getStudio()->toArray()),
         ];
 
         return new Response($this->renderView(
-            'profile/index.html.twig', [
+            'profile/user/index.html.twig',
+            [
                 'user' => $user,
                 'profileData' => $profileData
-            ])
-        );
+            ]
+        ));
     }
 
     /**
      * @Route("/update", name="profile_update")
      */
-    public function profileUpdate(
-        Request $request,
-        TranslatorInterface $translator
-    )
+    public function profileUpdate(Request $request, TranslatorInterface $translator)
     {
-        /** @var User $user */
+        /**
+         * @var User $user
+         */
         $user = $this->getUser();
 
-        $formData = ['username' => $user->getUsername(), 'fullName' => $user->getFullName()];
+        $formData = [
+            'username' => $user->getUsername(),
+            'fullName' => $user->getFullName()
+        ];
 
         $form = $this->createForm(
             UserUpdate::class,
@@ -72,7 +79,11 @@ class UserController extends Controller
             if ($usernameCheck !== null and $username !== $user->getUsername()) {
                 $form->get('username')->addError(
                     new FormError(
-                        $translator->trans('This username is already used', [], 'validators')
+                        $translator->trans(
+                            'This username is already used',
+                            [],
+                            'validators'
+                        )
                     )
                 );
             } else {
@@ -82,33 +93,37 @@ class UserController extends Controller
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($user);
                 $entityManager->flush();
-                $this->addFlash('success', 'Your profile has been updated');
+                $this->addFlash(
+                    'success',
+                    'Your profile has been updated'
+                );
 
                 return $this->redirectToRoute('profile');
             }
         }
 
         return new Response($this->renderView(
-            'profile/update.html.twig', [
+            'profile/user/update.html.twig',
+            [
                 'form' => $form->createView()
-            ])
-        );
+            ]
+        ));
     }
 
     /**
      * @Route("/password-change", name="profile_password")
      */
-    public function passwordChange(
-        Request $request,
-        UserPasswordEncoderInterface $passwordEncoder
-    )
+    public function passwordChange(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
         /**
          * @var User $user
          */
         $user = $this->getUser();
 
-        $formData = ['oldPassword' => '', 'plainPassword' => ''];
+        $formData = [
+            'oldPassword' => '',
+            'plainPassword' => ''
+        ];
 
         $form = $this->createForm(
             UserPasswordChange::class,
@@ -129,15 +144,19 @@ class UserController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-            $this->addFlash('success', 'Your password has changed');
+            $this->addFlash(
+                'success',
+                'Your password has changed'
+            );
 
             return $this->redirectToRoute('profile');
         }
 
         return new Response($this->renderView(
-            'profile/password-change.html.twig', [
+            'profile/user/password-change.html.twig',
+            [
                 'form' => $form->createView()
-            ])
-        );
+            ]
+        ));
     }
 }

@@ -1,0 +1,33 @@
+{% extends 'profile/layout.html.twig' %}
+
+{% block title %}{{user.fullName ~ title_separator ~ site_name }}{% endblock %}
+
+{% block content %}
+    <h2>{{ 'Profile'|trans }}</h2>
+
+    <table class="table">
+        <tbody>
+
+        {% for key,val in profileData %}
+
+            {% if val is not same as ('') %}
+
+            <tr>
+                <th scope="row">{{ key|trans }}</th>
+                <td>
+                    {% if key is same as ('Studio') %}
+                        <a href="{{ path('profile_studios') }}">{{ val }}</a>
+                    {% else %}
+                        {{ val }}
+                    {% endif %}
+                </td>
+            </tr>
+
+            {% endif %}
+
+        {% endfor %}
+
+        </tbody>
+    </table>
+{% endblock %}
+

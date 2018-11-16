@@ -29,7 +29,7 @@ class Studio
     private $address;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="studio")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="studio")
      */
     private $owner;
 
@@ -43,6 +43,10 @@ class Studio
         $this->style = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->name;
+    }
 
     public function getId(): ?int
     {

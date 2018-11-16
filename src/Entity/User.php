@@ -87,7 +87,7 @@ class User implements AdvancedUserInterface, \Serializable
     private $preferences;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Studio", mappedBy="owner")
+     * @ORM\OneToMany(targetEntity="App\Entity\Studio", mappedBy="owner")
      */
     private $studio;
 

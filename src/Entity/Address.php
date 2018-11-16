@@ -36,6 +36,19 @@ class Address
      */
     private $city;
 
+    public function __toString()
+    {
+        return $this->getFullAddress();
+    }
+
+    /**
+     * @return string
+     */
+    public function getFullAddress()
+    {
+        return $this->city.', '.$this->country;
+    }
+
     /**
      * @return mixed
      */
@@ -83,5 +96,4 @@ class Address
     {
         $this->city = $city;
     }
-
 }

@@ -49,6 +49,10 @@
                 <source>Username</source>
                 <target>Nutzername</target>
             </trans-unit>
+            <trans-unit id="register.email">
+                <source>Email</source>
+                <target>Email</target>
+            </trans-unit>
             <trans-unit id="register.password">
                 <source>Password</source>
                 <target>Passwort</target>
@@ -120,6 +124,10 @@
                 <source>Back to the main page.</source>
                 <target>Zurück zur Hauptseite.</target>
             </trans-unit>
+            <trans-unit id="flashes.new_studio">
+                <source>The new studio was added to your account</source>
+                <target>Das neue Studio wurde Ihrem Konto hinzugefügt</target>
+            </trans-unit>
 
             <trans-unit id="email.registration">
                 <source>email.registration</source>
@@ -189,6 +197,34 @@
             <trans-unit id="profile.new_repeated_password">
                 <source>New repeated password</source>
                 <target>Neues Passwort wiederholt</target>
+            </trans-unit>
+            <trans-unit id="profile.studio">
+                <source>Studio</source>
+                <target>Studio</target>
+            </trans-unit>
+            <trans-unit id="profile.studios">
+                <source>Studios</source>
+                <target>Studios</target>
+            </trans-unit>
+            <trans-unit id="profile.add_new_studio">
+                <source>Add new studio</source>
+                <target>Neues Studio hinzufügen</target>
+            </trans-unit>
+            <trans-unit id="profile.studio_name">
+                <source>Studio Name</source>
+                <target>Name des Studios</target>
+            </trans-unit>
+            <trans-unit id="profile.studio_country">
+                <source>Country</source>
+                <target>Land</target>
+            </trans-unit>
+            <trans-unit id="profile.studio_address">
+                <source>Address</source>
+                <target>Adresse</target>
+            </trans-unit>
+            <trans-unit id="profile.studio_styles">
+                <source>Styles</source>
+                <target>Styles</target>
             </trans-unit>
 
             <trans-unit id="search.search">

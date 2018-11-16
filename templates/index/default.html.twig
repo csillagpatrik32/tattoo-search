@@ -1,6 +1,6 @@
-{% extends 'base.html.twig' %}
+{% extends 'base-layout.html.twig' %}
 
-{% block body %}
+{% block content %}
     {%  if message_count == 0 %}
         <h3>{{ 'Oops'|trans }}!</h3>
         <p>{{ 'Something went wrong.'|trans }} <a href="{{ path('index') }}">{{ 'Back to the main page.'|trans }}</a></p>

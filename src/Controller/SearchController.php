@@ -6,13 +6,12 @@ use App\Entity\Address;
 use App\Entity\Studio;
 use App\Entity\Style;
 use App\Form\StudioSearch;
-use Doctrine\ORM\EntityManager;
+use App\Utils\RoutingUtils;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * @Route("/search")
@@ -24,39 +23,32 @@ class SearchController extends Controller
      */
     private $session;
 
-    /**
-     * @var EntityManager
-     */
-    private $entityManager;
-
-    public function __construct(
-        SessionInterface $session,
-        EntityManagerInterface $entityManager
-    )
+    public function __construct(SessionInterface $session)
     {
         $this->session = $session;
-        $this->entityManager = $entityManager;
     }
 
     /**
      * @Route("/", name="search")
      */
-    public function search(Request $request)
+    public function search(Request $request, RoutingUtils $routingUtils)
     {
+        /**
+         * @var Address $address
+         */
         $address = new Address();
+
+        /**
+         * @var Style $style
+         */
         $style = new Style();
 
-        $formData = [];
+        $formData = [
+            'city' => $address,
+            'style' => $style,
+        ];
 
-        if ($formData = $this->session->get('formData')) {
-            foreach ($formData as $key => $data) {
-                if (is_object($data)) {
-                    $formData[$key] = $this->entityManager->merge($data);
-                }
-            }
-            $address = $formData['city'];
-            $style = $formData['style'];
-        }
+        $formData = $routingUtils->mergeSessionEntities('formData');
 
         $form = $this->createForm(
             StudioSearch::class,
@@ -68,11 +60,11 @@ class SearchController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $formData = $form->getData();
 
-            $address = $formData['city'];
-            $style = $formData['style'];
-
             $this->session->set('formData', $formData);
         }
+
+        $address = $formData['city'];
+        $style = $formData['style'];
 
         $studios = $this->getDoctrine()
             ->getRepository(Studio::class)

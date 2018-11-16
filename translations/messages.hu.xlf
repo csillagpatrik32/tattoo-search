@@ -49,6 +49,10 @@
                 <source>Username</source>
                 <target>Felhasználónév</target>
             </trans-unit>
+            <trans-unit id="register.email">
+                <source>Email</source>
+                <target>Email</target>
+            </trans-unit>
             <trans-unit id="register.password">
                 <source>Password</source>
                 <target>Jelszó</target>
@@ -100,7 +104,7 @@
                 <source>Something went wrong. Please check your email.</source>
                 <target>Valami nem jó. Ellenőrizd az email fiókodat.</target>
             </trans-unit>
-            <trans-unit id="password.email_not_found">
+            <trans-unit id="flashes.email_not_found">
                 <source>This email was not found</source>
                 <target>Ez az email nem található</target>
             </trans-unit>
@@ -119,6 +123,10 @@
             <trans-unit id="flashes.back">
                 <source>Back to the main page.</source>
                 <target>Vissza a kezdőlapra.</target>
+            </trans-unit>
+            <trans-unit id="flashes.new_studio">
+                <source>The new studio was added to your account</source>
+                <target>Hozzáadtuk az új studiót a fiókodhoz</target>
             </trans-unit>
 
             <trans-unit id="email.registration">
@@ -192,6 +200,34 @@
             <trans-unit id="profile.new_repeated_password">
                 <source>New repeated password</source>
                 <target>Új jelszó ismét</target>
+            </trans-unit>
+            <trans-unit id="profile.studio">
+                <source>Studio</source>
+                <target>Stúdió</target>
+            </trans-unit>
+            <trans-unit id="profile.studios">
+                <source>Studios</source>
+                <target>Stúdiók</target>
+            </trans-unit>
+            <trans-unit id="profile.add_new_studio">
+                <source>Add new studio</source>
+                <target>Új stúdió hozzáadása</target>
+            </trans-unit>
+            <trans-unit id="profile.studio_name">
+                <source>Studio Name</source>
+                <target>Stúdió Neve</target>
+            </trans-unit>
+            <trans-unit id="profile.studio_country">
+                <source>Country</source>
+                <target>Ország</target>
+            </trans-unit>
+            <trans-unit id="profile.studio_address">
+                <source>Address</source>
+                <target>Cím</target>
+            </trans-unit>
+            <trans-unit id="profile.studio_styles">
+                <source>Styles</source>
+                <target>Stílusok</target>
             </trans-unit>
 
             <trans-unit id="search.search">

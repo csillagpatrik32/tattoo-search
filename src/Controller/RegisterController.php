@@ -18,13 +18,13 @@ class RegisterController extends Controller
     /**
      * @Route("/register", name="user_register")
      */
-    public function register(
-        UserPasswordEncoderInterface $passwordEncoder,
-        Request $request,
-        EventDispatcherInterface $eventDispatcher,
-        TokenGenerator $tokenGenerator
-    ){
+    public function register(UserPasswordEncoderInterface $passwordEncoder, Request $request, EventDispatcherInterface $eventDispatcher, TokenGenerator $tokenGenerator)
+    {
+        /**
+         * @var User $user
+         */
         $user = new User();
+
         $form = $this->createForm(
             UserType::class,
             $user
@@ -53,8 +53,10 @@ class RegisterController extends Controller
             return $this->redirectToRoute('default');
         }
 
-        return $this->render('register/register.html.twig', [
-            'form' => $form->createView()
-        ]);
+        return $this->render('register/register.html.twig',
+            [
+                'form' => $form->createView()
+            ]
+        );
     }
 }
