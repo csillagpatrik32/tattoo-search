@@ -33,6 +33,8 @@ class SearchController extends Controller
      */
     public function search(Request $request, RoutingUtils $routingUtils)
     {
+        $studios = [];
+
         /**
          * @var Address $address
          */
@@ -60,15 +62,19 @@ class SearchController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $formData = $form->getData();
 
-            $this->session->set('formData', $formData);
+            $address = $formData['city'];
+            $styles = $formData['style'];
+
+            $styleIds = [];
+
+            foreach ($styles as $style) {
+                $styleIds[] = $style->getId();
+            }
+
+            $studios = $this->getDoctrine()
+                ->getRepository(Studio::class)
+                ->findByCityAndStyle($address->getCity(), $styleIds);
         }
-
-        $address = $formData['city'];
-        $style = $formData['style'];
-
-        $studios = $this->getDoctrine()
-            ->getRepository(Studio::class)
-            ->findByCityAndStyle($address->getCity(), $style->getName());
 
         return new Response(
             $this->renderView('search/index.html.twig', [

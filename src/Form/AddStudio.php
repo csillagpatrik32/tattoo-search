@@ -3,8 +3,6 @@
 namespace App\Form;
 
 
-use App\Entity\Address;
-use App\Entity\Studio;
 use App\Entity\Style;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;

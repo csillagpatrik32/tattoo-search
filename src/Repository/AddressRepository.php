@@ -4,6 +4,8 @@ namespace App\Repository;
 
 use App\Entity\Address;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -17,6 +19,28 @@ class AddressRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Address::class);
+    }
+
+    /**
+     * @return ArrayCollection Returns an array collection of addresses based on distinct cities
+     */
+    public function distinctCities()
+    {
+        $result = $this->createQueryBuilder('a')
+            ->select('min(a.id) as id')
+            ->groupBy('a.city')
+            ->orderBy('a.city')
+            ->getQuery()
+            ->getResult()
+            ;
+
+        $addresses = new ArrayCollection();
+
+        foreach ($result as $row) {
+            $addresses->add($this->find($row['id']));
+        }
+
+        return $addresses;
     }
 
 //    /**

@@ -215,7 +215,7 @@
             </trans-unit>
             <trans-unit id="profile.studio_name">
                 <source>Studio Name</source>
-                <target>Stúdió Neve</target>
+                <target>Stúdió Név</target>
             </trans-unit>
             <trans-unit id="profile.studio_country">
                 <source>Country</source>
@@ -241,6 +241,10 @@
             <trans-unit id="search.style">
                 <source>Style</source>
                 <target>Stílus</target>
+            </trans-unit>
+            <trans-unit id="search.no_result">
+                <source>No result found</source>
+                <target>Nincs eredménye a keresésnek</target>
             </trans-unit>
         </body>
     </file>

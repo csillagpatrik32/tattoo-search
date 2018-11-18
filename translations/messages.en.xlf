@@ -238,6 +238,10 @@
                 <source>Style</source>
                 <target>Style</target>
             </trans-unit>
+            <trans-unit id="search.no_result">
+                <source>No result found</source>
+                <target>No result found</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

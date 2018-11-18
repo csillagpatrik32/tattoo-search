@@ -7,8 +7,8 @@
                 <target>Ez az e-mail foglalt</target>
             </trans-unit>
             <trans-unit id="register.usernameused">
-                <source>This username is already used</source>
-                <target>Ez a felhasználónév foglalt</target>
+                <source>This name is already used</source>
+                <target>Ez a név már foglalt</target>
             </trans-unit>
 
             <trans-unit id="forgotten.email_not_found">

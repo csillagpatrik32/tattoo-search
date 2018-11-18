@@ -30,11 +30,10 @@ class StudioRepository extends ServiceEntityRepository
             ->innerJoin('s.style', 'st')
             ->addSelect('st')
             ->andWhere('a.city = :city')
-            ->andWhere('st.name = :style')
+            ->andWhere('st.id IN (:style)')
             ->setParameter('city', $city)
             ->setParameter('style', $style)
             ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;

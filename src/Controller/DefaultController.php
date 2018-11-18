@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Address;
-use App\Entity\Style;
 use App\Form\StudioSearch;
 use App\Utils\RoutingUtils;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -25,7 +24,7 @@ class DefaultController extends Controller
     private $session;
 
     /**
-     * @var EntityManager
+     * @var EntityManagerInterface $entityManager
      */
     private $entityManager;
 
@@ -38,7 +37,7 @@ class DefaultController extends Controller
     /**
      * @Route("/", name="index")
      */
-    public function index(Request $request, RoutingUtils $routingUtils)
+    public function index(Request $request, RoutingUtils $routingUtils, SearchController $searchController)
     {
         $formData = $routingUtils->mergeSessionEntities('formData');
 
@@ -50,11 +49,9 @@ class DefaultController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $formData = $form->getData();
-
-            $this->session->set('formData', $formData);
-
-            return $this->redirectToRoute('search');
+            return $this->redirectToRoute('search', [
+                'request' => $request
+            ], 307);
         }
 
         return new Response(

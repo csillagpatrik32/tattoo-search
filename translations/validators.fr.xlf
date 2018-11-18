@@ -7,8 +7,8 @@
                 <target>Cet e-mail est déjà pris</target>
             </trans-unit>
             <trans-unit id="register.usernameused">
-                <source>This username is already used</source>
-                <target>Ce nom d'utilisateur est déjà utilisé</target>
+                <source>This name is already used</source>
+                <target>Ce nom est déjà utilisé</target>
             </trans-unit>
 
             <trans-unit id="forgotten.email_not_found">

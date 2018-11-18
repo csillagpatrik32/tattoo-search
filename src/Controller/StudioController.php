@@ -10,6 +10,7 @@ use App\Form\AddStudio;
 use App\Utils\RoutingUtils;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -105,10 +106,10 @@ class StudioController extends Controller
                 ->getRepository(Studio::class)
                 ->findOneBy(['name' => $studioName]);
             if ($studioNameCheck !== null) {
-                $form->get('username')->addError(
+                $form->get('name')->addError(
                     new FormError(
                         $translator->trans(
-                            'This username is already used',
+                            'This name is already used',
                             [],
                             'validators'
                         )

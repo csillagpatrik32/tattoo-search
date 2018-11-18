@@ -16,7 +16,7 @@
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
             {% if is_granted('ROLE_USER') %}
-                <a class="nav-link" href="">{{ 'Some function'|trans }}</a>
+                <a class="nav-link" href="{{ path('search') }}">{{ 'Search'|trans }}</a>
             {% else %}
                 <a class="nav-link" href="{{ path('user_register') }}">{{ 'Register'|trans }}</a>
             {% endif %}
