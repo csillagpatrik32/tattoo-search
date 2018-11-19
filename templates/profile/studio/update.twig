@@ -1,0 +1,13 @@
+{% extends 'profile/layout.html.twig' %}
+
+{% block title %}{{studio.name ~ title_separator ~ site_name }}{% endblock %}
+
+{% block content %}
+
+    <h2>{{ 'Update studio'|trans }}</h2>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button type="submit" class="btn-secondary btn">{{ 'Update'|trans }}</button>
+    {{ form_end(form) }}
+{% endblock %}

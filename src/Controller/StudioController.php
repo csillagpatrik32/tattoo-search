@@ -14,6 +14,7 @@ use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
@@ -42,8 +43,9 @@ class StudioController extends Controller
          * @var Studio $studio
          */
         foreach($studios as $key => $studio) {
+            $studioData[$key]['Id'] = $studio->getId();
             $studioData[$key]['Name'] = $studio->getName();
-            $studioData[$key]['Address'] = implode(', ',$studio->getAddress()->toArray());
+            $studioData[$key]['Address'] = $studio->getAddress();
             $studioData[$key]['Styles'] = implode(', ',$studio->getStyle()->toArray());
         }
 
@@ -58,7 +60,7 @@ class StudioController extends Controller
     /**
      * @Route("/add", name="profile_add_new_studio")
      */
-    public function addStudio(Request $request, TranslatorInterface $translator, RoutingUtils $routingUtils)
+    public function add(Request $request, TranslatorInterface $translator, RoutingUtils $routingUtils)
     {
         /**
          * @var Studio $studio
@@ -140,9 +142,79 @@ class StudioController extends Controller
             }
         }
 
-        return $this->render('profile/studio/add-new-studio.html.twig',
+        return $this->render('profile/studio/add.twig',
             [
                 'form' => $form->createView()
+            ]
+        );
+    }
+
+    /**
+     * @Route("/{id}", name="profile_studio_update")
+     * @Security("is_granted('update', studio)")
+     */
+    public function update(Studio $studio, Request $request, TranslatorInterface $translator, RoutingUtils $routingUtils)
+    {
+        $formData = [
+            'name' => $studio->getName(),
+            'country' => $studio->getAddress()->getCountry(),
+            'city' => $studio->getAddress()->getCity(),
+            'style' => $studio->getStyle(),
+        ];
+
+        //$formData = $routingUtils->mergeSessionEntities('formData');
+
+        $form = $this->createForm(
+            AddStudio::class,
+            $formData
+        );
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $formData = $form->getData();
+            $studioName = $formData['name'];
+            $country = $formData['country'];
+            $city = $formData['city'];
+            $styles = $formData['style'];
+
+            $studioNameCheck = $this->getDoctrine()
+                ->getRepository(Studio::class)
+                ->findOneBy(['name' => $studioName]);
+            if ($studioNameCheck !== null and $studioName !== $studio->getName()) {
+                $form->get('name')->addError(
+                    new FormError(
+                        $translator->trans(
+                            'This name is already used',
+                            [],
+                            'validators'
+                        )
+                    )
+                );
+            } else {
+                $studio->setName($studioName);
+                $studio->getAddress()->setCountry($country);
+                $studio->getAddress()->setCity($city);
+
+                foreach($styles as $style) {
+                    $studio->addStyle($style);
+                }
+
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($studio);
+                $entityManager->flush();
+                $this->addFlash(
+                    'success',
+                    'The studio was updated'
+                );
+
+                return $this->redirectToRoute('profile_studios');
+            }
+        }
+
+        return $this->render('profile/studio/update.twig',
+            [
+                'form' => $form->createView(),
+                'studio' => $studio,
             ]
         );
     }

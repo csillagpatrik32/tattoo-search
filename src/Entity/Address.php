@@ -22,7 +22,7 @@ class Address
     }
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Studio", inversedBy="address")
+     * @ORM\OneToOne(targetEntity="App\Entity\Studio", inversedBy="address")
      */
     private $studio;
 
@@ -50,7 +50,7 @@ class Address
     }
 
     /**
-     * @return mixed
+     * @return Studio
      */
     public function getStudio()
     {
@@ -66,7 +66,7 @@ class Address
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getCountry()
     {
@@ -82,7 +82,7 @@ class Address
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getCity()
     {

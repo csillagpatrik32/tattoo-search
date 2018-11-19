@@ -52,11 +52,7 @@ class SecurityController extends Controller
     /**
      * @Route("/confirm/{token}", name="security_confirm")
      */
-    public function confirm(
-        string $token,
-        UserRepository $userRepository,
-        EntityManagerInterface $entityManager
-    )
+    public function confirm(string $token, UserRepository $userRepository, EntityManagerInterface $entityManager)
     {
         $user = $userRepository->findOneBy([
             'confirmationToken' => $token

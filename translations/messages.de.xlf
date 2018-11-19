@@ -128,6 +128,14 @@
                 <source>The new studio was added to your account</source>
                 <target>Das neue Studio wurde Ihrem Konto hinzugefügt</target>
             </trans-unit>
+            <trans-unit id="flashes.update_studio">
+                <source>Update studio</source>
+                <target>Studio aktualisieren</target>
+            </trans-unit>
+            <trans-unit id="flashes.studio_updated">
+                <source>The studio was updated</source>
+                <target>Das Studio wurde aktualisiert</target>
+            </trans-unit>
 
             <trans-unit id="email.registration">
                 <source>email.registration</source>

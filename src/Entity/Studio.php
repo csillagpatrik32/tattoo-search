@@ -24,7 +24,7 @@ class Studio
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Address", mappedBy="studio")
+     * @ORM\OneToOne(targetEntity="App\Entity\Address", mappedBy="studio")
      */
     private $address;
 
@@ -54,7 +54,7 @@ class Studio
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getName()
     {
@@ -70,7 +70,7 @@ class Studio
     }
 
     /**
-     * @return mixed
+     * @return Address
      */
     public function getAddress()
     {
@@ -86,7 +86,7 @@ class Studio
     }
 
     /**
-     * @return mixed
+     * @return User
      */
     public function getOwner()
     {

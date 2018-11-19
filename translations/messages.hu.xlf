@@ -128,6 +128,14 @@
                 <source>The new studio was added to your account</source>
                 <target>Hozzáadtuk az új studiót a fiókodhoz</target>
             </trans-unit>
+            <trans-unit id="flashes.update_studio">
+                <source>Update studio</source>
+                <target>Stúdió módosítás</target>
+            </trans-unit>
+            <trans-unit id="flashes.studio_updated">
+                <source>The studio was updated</source>
+                <target>A stúdió módosítva lett</target>
+            </trans-unit>
 
             <trans-unit id="email.registration">
                 <source>email.registration</source>
