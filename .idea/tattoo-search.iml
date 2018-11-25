@@ -105,6 +105,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="symfony-01" />
     <orderEntry type="module-library">
       <library name="PHP" type="php">
         <CLASSES>
@@ -309,6 +310,5 @@
         </SOURCES>
       </library>
     </orderEntry>
-    <orderEntry type="module" module-name="symfony-01" />
   </component>
 </module>

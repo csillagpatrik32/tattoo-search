@@ -9,10 +9,11 @@
         {% for studio in studioData %}
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title"><a href="{{ path('profile_studio_update', {id: studio.Id}) }}" >{{ studio.Name }}</a></h5>
+                    <h5 class="card-title"><a href="{{ path('profile_studio', {id: studio.Id}) }}" >{{ studio.Name }}</a></h5>
                     <p class="card-text">{{ 'Address'|trans }}: {{ studio.Address }}</p>
-                    <p class="card-text">{{ 'Styles'|trans }}: {{ studio.Styles }}</p>
-                    <!--<a href="#" class="card-link">Link</a>-->
+                    <p class="card-text">{{ 'Styles'|trans }}: {{ studio.Styles|join(', ') }}</p>
+                    <a href="{{ path('profile_studio_edit', {id: studio.Id}) }}" class="card-link">{{ 'Edit'|trans }}</a>
+                    <a href="{{ path('profile_studio_add_employee', {id: studio.Id}) }}" class="card-link">{{ 'Add new employee'|trans }}</a>
                 </div>
             </div>
         {% endfor %}

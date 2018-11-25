@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,13 +24,13 @@ class Style
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Studio", mappedBy="style")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Studio", mappedBy="styles")
      */
-    private $studio;
+    private $studios;
 
     public function __construct()
     {
-        $this->studio = new ArrayCollection();
+        $this->studios = new ArrayCollection();
     }
 
     public function __toString()
@@ -43,11 +44,11 @@ class Style
     }
 
     /**
-     * @return mixed Collection
+     * @return Collection
      */
-    public function getStudio()
+    public function getStudio(): Collection
     {
-        return $this->studio;
+        return $this->studios;
     }
 
     /**

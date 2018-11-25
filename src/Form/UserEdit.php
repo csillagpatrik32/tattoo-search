@@ -10,7 +10,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class UserUpdate extends AbstractType
+class UserEdit extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -26,7 +26,7 @@ class UserUpdate extends AbstractType
                     new Assert\NotBlank()
                 ]
             ])
-            ->add('update',SubmitType::class);
+            ->add('edit',SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

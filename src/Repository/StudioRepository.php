@@ -27,7 +27,7 @@ class StudioRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('s')
             ->innerJoin('s.address', 'a')
             ->addSelect('a')
-            ->innerJoin('s.style', 'st')
+            ->innerJoin('s.styles', 'st')
             ->addSelect('st')
             ->andWhere('a.city = :city')
             ->andWhere('st.id IN (:style)')

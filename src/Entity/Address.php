@@ -52,7 +52,7 @@ class Address
     /**
      * @return Studio
      */
-    public function getStudio()
+    public function getStudio(): ?Studio
     {
         return $this->studio;
     }
@@ -60,9 +60,11 @@ class Address
     /**
      * @param mixed $studio
      */
-    public function setStudio($studio): void
+    public function setStudio($studio): self
     {
         $this->studio = $studio;
+
+        return $this;
     }
 
     /**
@@ -76,9 +78,11 @@ class Address
     /**
      * @param mixed $country
      */
-    public function setCountry($country): void
+    public function setCountry($country): self
     {
         $this->country = $country;
+
+        return $this;
     }
 
     /**
@@ -92,8 +96,10 @@ class Address
     /**
      * @param mixed $city
      */
-    public function setCity($city): void
+    public function setCity($city): self
     {
         $this->city = $city;
+
+        return $this;
     }
 }

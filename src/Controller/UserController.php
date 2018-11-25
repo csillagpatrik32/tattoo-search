@@ -5,7 +5,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserPasswordChange;
-use App\Form\UserUpdate;
+use App\Form\UserEdit;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
@@ -35,7 +35,7 @@ class UserController extends Controller
             'Username' => $user->getUsername(),
             'Email' => $user->getEmail(),
             'Full name' => $user->getFullName(),
-            'Studio' => implode(', ', $user->getStudio()->toArray()),
+            'Studio' => implode(', ', $user->getStudios()->toArray()),
         ];
 
         return new Response($this->renderView(
@@ -48,9 +48,9 @@ class UserController extends Controller
     }
 
     /**
-     * @Route("/update", name="profile_update")
+     * @Route("/edit", name="profile_edit")
      */
-    public function profileUpdate(Request $request, TranslatorInterface $translator)
+    public function profileEdit(Request $request, TranslatorInterface $translator)
     {
         /**
          * @var User $user
@@ -63,7 +63,7 @@ class UserController extends Controller
         ];
 
         $form = $this->createForm(
-            UserUpdate::class,
+            UserEdit::class,
             $formData
         );
         $form->handleRequest($request);
@@ -103,7 +103,7 @@ class UserController extends Controller
         }
 
         return new Response($this->renderView(
-            'profile/user/update.html.twig',
+            'profile/user/edit.html.twig',
             [
                 'form' => $form->createView()
             ]

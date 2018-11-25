@@ -11,8 +11,9 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class StudioVoter extends Voter
 {
-    const UPDATE = 'update';
     const DELETE = 'delete';
+    const EDIT = 'edit';
+    const VIEW = 'view';
     /**
      * @var AccessDecisionManagerInterface
      */
@@ -25,7 +26,7 @@ class StudioVoter extends Voter
 
     protected function supports($attribute, $subject)
     {
-        if (!in_array($attribute, [self::UPDATE, self::DELETE])) {
+        if (!in_array($attribute, [self::DELETE, self::EDIT, self::VIEW])) {
             return false;
         }
 

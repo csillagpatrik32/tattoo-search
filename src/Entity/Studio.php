@@ -29,18 +29,24 @@ class Studio
     private $address;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="studio")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="studios")
      */
     private $owner;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Style", inversedBy="studio")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Style", inversedBy="studios")
      */
-    private $style;
+    private $styles;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Employee", mappedBy="studio", orphanRemoval=true)
+     */
+    private $employees;
 
     public function __construct()
     {
-        $this->style = new ArrayCollection();
+        $this->styles = new ArrayCollection();
+        $this->employees = new ArrayCollection();
     }
 
     public function __toString()
@@ -64,9 +70,11 @@ class Studio
     /**
      * @param mixed $name
      */
-    public function setName($name): void
+    public function setName($name): self
     {
         $this->name = $name;
+
+        return $this;
     }
 
     /**
@@ -80,15 +88,17 @@ class Studio
     /**
      * @param mixed $address
      */
-    public function setAddress($address): void
+    public function setAddress($address): self
     {
         $this->address = $address;
+
+        return $this;
     }
 
     /**
      * @return User
      */
-    public function getOwner()
+    public function getOwner(): ?User
     {
         return $this->owner;
     }
@@ -96,34 +106,62 @@ class Studio
     /**
      * @param mixed $owner
      */
-    public function setOwner($owner): void
+    public function setOwner($owner): self
     {
         $this->owner = $owner;
+
+        return $this;
     }
 
     /**
-     * @return Collection
+     * @return Collection|Style[]
      */
-    public function getStyle()
+    public function getStyles(): Collection
     {
-        return $this->style;
+        return $this->styles;
     }
 
     public function addStyle(Style $style)
     {
-        if ($this->style->contains($style)) {
+        if ($this->styles->contains($style)) {
             return;
         }
 
-        $this->style->add($style);
+        $this->styles->add($style);
     }
 
     public function removeStyle(Style $style)
     {
-        if (!$this->style->contains($style)) {
+        if (!$this->styles->contains($style)) {
             return;
         }
 
-        $this->style->removeElement($style);
+        $this->styles->removeElement($style);
+    }
+
+    /**
+     * @return Collection|Employee[]
+     */
+    public function getEmployees(): Collection
+    {
+        return $this->employees;
+    }
+
+    public function addEmployee(Employee $employee)
+    {
+        if ($this->employees->contains($employee)) {
+            return;
+        }
+
+        $this->employees->add($employee);
+    }
+
+    public function removeEmployee(Employee $employee)
+    {
+        if (!$this->employees->contains($employee)) {
+            return;
+        }
+
+        $this->employees->removeElement($employee);
     }
 }

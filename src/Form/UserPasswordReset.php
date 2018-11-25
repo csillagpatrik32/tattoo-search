@@ -25,7 +25,7 @@ class UserPasswordReset extends AbstractType
                     new NotBlank()
                 ]
             ])
-            ->add('Update',SubmitType::class);
+            ->add('edit',SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

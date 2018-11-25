@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
@@ -39,7 +41,7 @@ class User implements AdvancedUserInterface, \Serializable
      * @Assert\NotBlank()
      * @Assert\Length(min=8, max=254)
      */
-    private $plainPassword;
+    private $plainPassword = 12345678;
 
     /**
      * @ORM\Column(type="string", length=254, unique=true)
@@ -89,12 +91,19 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Studio", mappedBy="owner")
      */
-    private $studio;
+    private $studios;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Employee", mappedBy="user")
+     */
+    private $employees;
 
     public function __construct()
     {
         $this->roles = [self::ROLE_USER];
         $this->enabled = false;
+        $this->studios = new ArrayCollection();
+        $this->employees = new ArrayCollection();
     }
 
     public function __toString()
@@ -187,10 +196,13 @@ class User implements AdvancedUserInterface, \Serializable
 
     /**
      * @param mixed $plainPassword
+     * @return User
      */
-    public function setPlainPassword($plainPassword): void
+    public function setPlainPassword($plainPassword): self
     {
         $this->plainPassword = $plainPassword;
+
+        return $this;
     }
 
     /**
@@ -236,9 +248,11 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @param mixed $confirmationToken
      */
-    public function setConfirmationToken($confirmationToken): void
+    public function setConfirmationToken($confirmationToken): self
     {
         $this->confirmationToken = $confirmationToken;
+
+        return $this;
     }
 
     public function isAccountNonExpired()
@@ -326,18 +340,18 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * @return mixed
+     * @return Collection|Studio[]
      */
-    public function getStudio()
+    public function getStudios(): Collection
     {
-        return $this->studio;
+        return $this->studios;
     }
 
     /**
-     * @param mixed $studio
+     * @return Collection|Employee[]
      */
-    public function setStudio($studio): void
+    public function getEmployees(): Collection
     {
-        $this->studio = $studio;
+        return $this->employees;
     }
 }

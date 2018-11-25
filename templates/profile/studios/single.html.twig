@@ -1,0 +1,34 @@
+{% extends 'profile/layout.html.twig' %}
+
+{% block title %}{{studio.Name ~ title_separator ~ site_name }}{% endblock %}
+
+{% block content %}
+
+    {% if studio %}
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">{{ studio.Name }}</h3>
+                <p class="card-text">{{ 'Address'|trans }}: {{ studio.Address }}</p>
+                <p class="card-text">{{ 'Styles'|trans }}: {{ studio.Styles|join(', ') }}</p>
+                {% if studio.Employees %}
+                    <p class="card-text">
+                    {{ 'Employees'|trans }}
+                        <ul class="list-group">
+                            {% for employee in studio.Employees %}
+                                <li class="list-group-item">{{ employee }}
+                                    <span class="float-right">
+                                        <a href="{{ path('profile_studio_edit_employee', {'id': employee.Id}) }}">Edit</a>
+                                        <a href="{{ path('profile_studio_delete_employee', {'id': employee.Id}) }}">Delete</a>
+                                    </span>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </p>
+                {% endif %}
+                <a href="{{ path('profile_studio_edit', {id: studio.Id}) }}" class="card-link">{{ 'Edit'|trans }}</a>
+                <a href="{{ path('profile_studio_add_employee', {id: studio.Id}) }}" class="card-link">{{ 'Add new employee'|trans }}</a>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}

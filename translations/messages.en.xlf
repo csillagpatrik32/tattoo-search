@@ -70,6 +70,39 @@
                 <target>Register</target>
             </trans-unit>
 
+            <trans-unit id="menu.user">
+                <source>User</source>
+                <target>User</target>
+            </trans-unit>
+            <trans-unit id="menu.edit">
+                <source>Edit</source>
+                <target>Edit</target>
+            </trans-unit>
+            <trans-unit id="menu.delete">
+                <source>Delete</source>
+                <target>Delete</target>
+            </trans-unit>
+            <trans-unit id="menu.year">
+                <source>Year</source>
+                <target>Year</target>
+            </trans-unit>
+            <trans-unit id="menu.month">
+                <source>Month</source>
+                <target>Month</target>
+            </trans-unit>
+            <trans-unit id="menu.day">
+                <source>Day</source>
+                <target>Day</target>
+            </trans-unit>
+            <trans-unit id="menu.start_date">
+                <source>Start date</source>
+                <target>Start date</target>
+            </trans-unit>
+            <trans-unit id="menu.end_date">
+                <source>End date</source>
+                <target>End date</target>
+            </trans-unit>
+
             <trans-unit id="password.forgotten">
                 <source>Password forgotten</source>
                 <target>Password forgotten</target>
@@ -128,13 +161,21 @@
                 <source>The new studio was added to your account</source>
                 <target>The new studio was added to your account</target>
             </trans-unit>
-            <trans-unit id="flashes.update_studio">
-                <source>Update studio</source>
-                <target>Update studio</target>
-            </trans-unit>
             <trans-unit id="flashes.studio_updated">
                 <source>The studio was updated</source>
                 <target>The studio was updated</target>
+            </trans-unit>
+            <trans-unit id="flashes.studio_employee_update">
+                <source>The employee was updated</source>
+                <target>The employee was updated</target>
+            </trans-unit>
+            <trans-unit id="flashes.studio_employee_add">
+                <source>The employee was added to the studio</source>
+                <target>The employee was added to the studio</target>
+            </trans-unit>
+            <trans-unit id="flashes.studio_employee_delete">
+                <source>The employee was deleted</source>
+                <target>The employee was deleted</target>
             </trans-unit>
 
             <trans-unit id="email.registration">
@@ -181,15 +222,15 @@
                 <source>Profile</source>
                 <target>Profile</target>
             </trans-unit>
-            <trans-unit id="profile.update">
-                <source>Profile update</source>
-                <target>Profile update</target>
+            <trans-unit id="profile.edit">
+                <source>Edit profile</source>
+                <target>Edit profile</target>
             </trans-unit>
-            <trans-unit id="profile.updatebtn">
-                <source>Update</source>
-                <target>Update</target>
+            <trans-unit id="profile.edit_btn">
+                <source>Edit</source>
+                <target>Edit</target>
             </trans-unit>
-            <trans-unit id="profile.passwordupdate">
+            <trans-unit id="profile.password_change">
                 <source>Password change</source>
                 <target>Password change</target>
             </trans-unit>
@@ -217,6 +258,10 @@
                 <source>Add new studio</source>
                 <target>Add new studio</target>
             </trans-unit>
+            <trans-unit id="flashes.edit_studio">
+                <source>Edit studio</source>
+                <target>Edit studio</target>
+            </trans-unit>
             <trans-unit id="profile.studio_name">
                 <source>Studio Name</source>
                 <target>Studio Name</target>
@@ -233,6 +278,19 @@
                 <source>Styles</source>
                 <target>Styles</target>
             </trans-unit>
+            <trans-unit id="profile.studio_employees">
+                <source>Employees</source>
+                <target>Employees</target>
+            </trans-unit>
+            <trans-unit id="profile.studio_add_employee">
+                <source>Add new employee</source>
+                <target>Add new employee</target>
+            </trans-unit>
+            <trans-unit id="profile.studio_edit_employee">
+                <source>Edit employee</source>
+                <target>Edit employee</target>
+            </trans-unit>
+
 
             <trans-unit id="search.search">
                 <source>Search</source>

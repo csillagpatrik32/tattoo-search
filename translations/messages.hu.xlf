@@ -70,6 +70,39 @@
                 <target>Regisztrálok</target>
             </trans-unit>
 
+            <trans-unit id="menu.user">
+                <source>User</source>
+                <target>Felhasználó</target>
+            </trans-unit>
+            <trans-unit id="menu.edit">
+                <source>Edit</source>
+                <target>Módosítás</target>
+            </trans-unit>
+            <trans-unit id="menu.delete">
+                <source>Delete</source>
+                <target>Törlés</target>
+            </trans-unit>
+            <trans-unit id="menu.year">
+                <source>Year</source>
+                <target>Év</target>
+            </trans-unit>
+            <trans-unit id="menu.month">
+                <source>Month</source>
+                <target>Hónap</target>
+            </trans-unit>
+            <trans-unit id="menu.day">
+                <source>Day</source>
+                <target>Nap</target>
+            </trans-unit>
+            <trans-unit id="menu.start_date">
+                <source>Start date</source>
+                <target>Kezdő dátum</target>
+            </trans-unit>
+            <trans-unit id="menu.end_date">
+                <source>End date</source>
+                <target>Befejező dátum</target>
+            </trans-unit>
+
             <trans-unit id="password.forgotten">
                 <source>Password forgotten</source>
                 <target>Elfelejtett jelszó</target>
@@ -128,13 +161,25 @@
                 <source>The new studio was added to your account</source>
                 <target>Hozzáadtuk az új studiót a fiókodhoz</target>
             </trans-unit>
-            <trans-unit id="flashes.update_studio">
-                <source>Update studio</source>
+            <trans-unit id="flashes.edit_studio">
+                <source>Edit studio</source>
                 <target>Stúdió módosítás</target>
             </trans-unit>
             <trans-unit id="flashes.studio_updated">
                 <source>The studio was updated</source>
                 <target>A stúdió módosítva lett</target>
+            </trans-unit>
+            <trans-unit id="flashes.studio_employee_update">
+                <source>The employee was updated</source>
+                <target>A munkavállaló módosítva lett</target>
+            </trans-unit>
+            <trans-unit id="flashes.studio_employee_add">
+                <source>The employee was added to the studio</source>
+                <target>A munkavállaló hozzá lett adva a stúdióhoz</target>
+            </trans-unit>
+            <trans-unit id="flashes.studio_employee_delete">
+                <source>The employee was deleted</source>
+                <target>A munkavállaló törölve lett</target>
             </trans-unit>
 
             <trans-unit id="email.registration">
@@ -185,15 +230,15 @@
                 <source>Profile</source>
                 <target>Profil</target>
             </trans-unit>
-            <trans-unit id="profile.update">
-                <source>Profile update</source>
+            <trans-unit id="profile.edit">
+                <source>Edit profile</source>
                 <target>Profil módosítás</target>
             </trans-unit>
-            <trans-unit id="profile.updatebtn">
-                <source>Update</source>
+            <trans-unit id="profile.edit_btn">
+                <source>Edit</source>
                 <target>Módosítás</target>
             </trans-unit>
-            <trans-unit id="profile.passwordupdate">
+            <trans-unit id="profile.password_change">
                 <source>Password change</source>
                 <target>Jelszó módosítás</target>
             </trans-unit>
@@ -236,6 +281,18 @@
             <trans-unit id="profile.studio_styles">
                 <source>Styles</source>
                 <target>Stílusok</target>
+            </trans-unit>
+            <trans-unit id="profile.studio_employees">
+                <source>Employees</source>
+                <target>Munkavállalók</target>
+            </trans-unit>
+            <trans-unit id="profile.studio_add_employee">
+                <source>Add new employee</source>
+                <target>Új munkavállaló hozzáadása</target>
+            </trans-unit>
+            <trans-unit id="profile.studio_edit_employee">
+                <source>Edit employee</source>
+                <target>Munkavállaló szerkesztése</target>
             </trans-unit>
 
             <trans-unit id="search.search">

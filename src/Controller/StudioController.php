@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Address;
+use App\Entity\Employee;
 use App\Entity\Studio;
 use App\Entity\Style;
 use App\Entity\User;
+use App\Form\AddEmployee;
 use App\Form\AddStudio;
 use App\Utils\RoutingUtils;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -33,9 +35,7 @@ class StudioController extends Controller
          */
         $user = $this->getUser();
 
-        $studios = $this->getDoctrine()
-            ->getRepository(Studio::class)
-            ->findBy(['owner' => $user->getId()]);
+        $studios = $user->getStudios();
 
         $studioData = [];
 
@@ -46,11 +46,11 @@ class StudioController extends Controller
             $studioData[$key]['Id'] = $studio->getId();
             $studioData[$key]['Name'] = $studio->getName();
             $studioData[$key]['Address'] = $studio->getAddress();
-            $studioData[$key]['Styles'] = implode(', ',$studio->getStyle()->toArray());
+            $studioData[$key]['Styles'] = $studio->getStyles();
         }
 
         return new Response($this->renderView(
-            'profile/studio/index.html.twig',
+            'profile/studios/index.html.twig',
             [
                 'studioData' => $studioData
             ]
@@ -135,14 +135,14 @@ class StudioController extends Controller
                 $entityManager->flush();
                 $this->addFlash(
                     'success',
-                    'The new studio was added to your account'
+                    'The new studios was added to your account'
                 );
 
                 return $this->redirectToRoute('profile_studios');
             }
         }
 
-        return $this->render('profile/studio/add.twig',
+        return $this->render('profile/studios/add.twig',
             [
                 'form' => $form->createView()
             ]
@@ -150,16 +150,16 @@ class StudioController extends Controller
     }
 
     /**
-     * @Route("/{id}", name="profile_studio_update")
-     * @Security("is_granted('update', studio)")
+     * @Route("/edit/{id}", name="profile_studio_edit")
+     * @Security("is_granted('edit', studio)")
      */
-    public function update(Studio $studio, Request $request, TranslatorInterface $translator, RoutingUtils $routingUtils)
+    public function edit(Studio $studio, Request $request, TranslatorInterface $translator, RoutingUtils $routingUtils)
     {
         $formData = [
             'name' => $studio->getName(),
             'country' => $studio->getAddress()->getCountry(),
             'city' => $studio->getAddress()->getCity(),
-            'style' => $studio->getStyle(),
+            'style' => $studio->getStyles(),
         ];
 
         //$formData = $routingUtils->mergeSessionEntities('formData');
@@ -211,11 +211,172 @@ class StudioController extends Controller
             }
         }
 
-        return $this->render('profile/studio/update.twig',
+        return $this->render('profile/studios/edit.html.twig',
             [
                 'form' => $form->createView(),
                 'studio' => $studio,
             ]
         );
+    }
+
+    /**
+     * @Route("/{id}", name="profile_studio")
+     * @Security("is_granted('edit', studio)")
+     */
+    public function single(Studio $studio, Request $request, RoutingUtils $routingUtils)
+    {
+        return $this->render('profile/studios/single.html.twig',
+            [
+                'studio' => $studio,
+            ]
+        );
+    }
+
+    /**
+     * @Route("/add-employee/{id}", name="profile_studio_add_employee")
+     * @Security("is_granted('edit', studio)")
+     */
+    public function addEmployee(Studio $studio, Request $request, TranslatorInterface $translator)
+    {
+        $employee = new Employee();
+
+        $form = $this->createForm(
+            AddEmployee::class,
+            []
+        );
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $formData = $form->getData();
+            $user = $formData['user'];
+            $startDate = $formData['startDate'];
+            $endDate = $formData['endDate'];
+
+            $checkUniqueEmployee = $this->getDoctrine()
+                ->getRepository(Employee::class)
+                ->checkUniqueEmployee($user, $studio, $startDate, $endDate);
+
+            if ($checkUniqueEmployee) {
+                $form->get('user')->addError(
+                    new FormError(
+                        $translator->trans(
+                            'This user is already an employee for this period',
+                            [],
+                            'validators'
+                        )
+                    )
+                );
+            } else {
+                $employee->setUser($user);
+                $employee->setStudio($studio);
+                $employee->setStartDate($startDate);
+                $employee->setEndDate($endDate);
+
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($employee);
+                $entityManager->flush();
+
+                $this->addFlash(
+                    'success',
+                    'The employee was added to the studio'
+                );
+
+                return $this->redirectToRoute('profile_studio', ['id' => $studio->getId()]);
+            }
+        }
+
+        return $this->render('profile/studios/employee/add.twig',
+            [
+                'form' => $form->createView(),
+            ]
+        );
+    }
+
+    /**
+     * @Route("/edit-employee/{id}", name="profile_studio_edit_employee")
+     */
+    public function editEmployee(Employee $employee, Request $request, TranslatorInterface $translator)
+    {
+        $studio = $employee->getStudio();
+
+        $this->denyAccessUnlessGranted('edit', $studio);
+
+        $form = $this->createForm(
+            AddEmployee::class,
+            [
+                'user' => $employee->getUser(),
+                'startDate' => $employee->getStartDate(),
+                'endDate' => $employee->getEndDate(),
+            ]
+        );
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $formData = $form->getData();
+            $user = $formData['user'];
+            $startDate = $formData['startDate'];
+            $endDate = $formData['endDate'];
+
+            $checkUniqueEmployee = $this->getDoctrine()
+                ->getRepository(Employee::class)
+                ->checkUniqueEmployee($user, $studio, $startDate, $endDate, $employee->getId());
+
+            if ($checkUniqueEmployee) {
+                $form->get('user')->addError(
+                    new FormError(
+                        $translator->trans(
+                            'This user is already an employee for this period',
+                            [],
+                            'validators'
+                        )
+                    )
+                );
+            } else {
+                $employee->setUser($user);
+                $employee->setStudio($studio);
+                $employee->setStartDate($startDate);
+                $employee->setEndDate($endDate);
+
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($employee);
+                $entityManager->flush();
+
+                $this->addFlash(
+                    'success',
+                    'The employee was updated'
+                );
+
+                return $this->redirectToRoute('profile_studio', ['id' => $studio->getId()]);
+            }
+        }
+
+        return $this->render('profile/studios/employee/edit.twig',
+            [
+                'form' => $form->createView(),
+            ]
+        );
+    }
+
+    /**
+     * @Route("/delete-employee/{id}", name="profile_studio_delete_employee")
+     */
+    public function deleteEmployee(Employee $employee, Request $request, TranslatorInterface $translator)
+    {
+        $studio = $employee->getStudio();
+
+        $this->denyAccessUnlessGranted('delete', $studio);
+
+        $studio->removeEmployee($employee);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($studio);
+        $entityManager->flush();
+
+        $this->addFlash(
+            'success',
+            'The employee was deleted'
+        );
+
+        return $this->redirectToRoute('profile_studio', ['id' => $studio->getId()]);
     }
 }

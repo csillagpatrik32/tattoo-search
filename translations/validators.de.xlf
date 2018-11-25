@@ -15,6 +15,11 @@
                 <source>This email is not found</source>
                 <target>Diese Email wird nicht gefunden</target>
             </trans-unit>
+
+            <trans-unit id="flashes.studio_employee_already">
+                <source>This user is already an employee for this period</source>
+                <target>Dieser Benutzer ist für diesen Zeitraum bereits ein Mitarbeiter</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
