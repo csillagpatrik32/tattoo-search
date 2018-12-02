@@ -15,11 +15,11 @@ class AppFixtures extends Fixture
 {
     private const USERS = [
         [
-            'username' => 'super_admin',
-            'email' => 'super_admin@admin.com',
+            'username' => 'putgik',
+            'email' => 'putgik@gmail.com',
             'password' => 'admin1234',
             'fullName' => 'Super Admin',
-            'roles' => [User::ROLE_ADMIN]
+            'roles' => [User::ROLE_SUPERADMIN]
         ],
         [
             'username' => 'test',

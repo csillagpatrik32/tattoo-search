@@ -39,11 +39,9 @@ class DefaultController extends Controller
      */
     public function index(Request $request, RoutingUtils $routingUtils, SearchController $searchController)
     {
-        $formData = $routingUtils->mergeSessionEntities('formData');
-
         $form = $this->createForm(
             StudioSearch::class,
-            $formData
+            []
         );
 
         $form->handleRequest($request);

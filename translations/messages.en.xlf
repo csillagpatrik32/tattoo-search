@@ -213,6 +213,10 @@
                 <source>Welcome to the </source>
                 <target>Welcome to the </target>
             </trans-unit>
+            <trans-unit id="index.welcomeadd">
+                <source> oldalon</source>
+                <target></target>
+            </trans-unit>
             <trans-unit id="index.register">
                 <source>Register here</source>
                 <target>Register here</target>

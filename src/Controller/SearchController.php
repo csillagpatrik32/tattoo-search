@@ -35,26 +35,9 @@ class SearchController extends Controller
     {
         $studios = [];
 
-        /**
-         * @var Address $address
-         */
-        $address = new Address();
-
-        /**
-         * @var Style $style
-         */
-        $style = new Style();
-
-        $formData = [
-            'city' => $address,
-            'style' => $style,
-        ];
-
-        $formData = $routingUtils->mergeSessionEntities('formData');
-
         $form = $this->createForm(
             StudioSearch::class,
-            $formData
+            []
         );
 
         $form->handleRequest($request);

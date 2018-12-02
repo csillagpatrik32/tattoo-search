@@ -15,12 +15,16 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('profile_password') }}">{{ 'Password change'|trans }}</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('profile_studios') }}">{{ 'Studios'|trans }}</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('profile_add_new_studio') }}">{{ 'Add new studio'|trans }}</a>
-            </li>
+            {% if is_granted('ROLE_MANAGER') %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('profile_studios') }}">{{ 'Studios'|trans }}</a>
+                </li>
+            {% endif %}
+            {% if is_granted('ROLE_OWNER') %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('profile_add_new_studio') }}">{{ 'Add new studio'|trans }}</a>
+                </li>
+            {% endif %}
         </ul>
     </div>
 

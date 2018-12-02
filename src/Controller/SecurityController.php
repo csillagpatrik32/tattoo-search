@@ -58,7 +58,7 @@ class SecurityController extends Controller
             'confirmationToken' => $token
         ]);
 
-        if ($user === null) {
+        if (!$user) {
             $this->addFlash('danger', 'Something went wrong. Please check your email.');
             return $this->redirectToRoute('default');
         }

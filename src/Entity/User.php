@@ -17,7 +17,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 class User implements AdvancedUserInterface, \Serializable
 {
     const ROLE_USER = 'ROLE_USER';
+    const ROLE_ARTIST = 'ROLE_ARTIST';
+    const ROLE_MANAGER = 'ROLE_MANAGER';
+    const ROLE_OWNER = 'ROLE_OWNER';
     const ROLE_ADMIN = 'ROLE_ADMIN';
+    const ROLE_SUPERADMIN = 'ROLE_SUPERADMIN';
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -111,6 +115,42 @@ class User implements AdvancedUserInterface, \Serializable
         return $this->username;
     }
 
+    /**
+     * @return array
+     */
+    public function getAvailableRoles()
+    {
+        return [
+            User::ROLE_USER,
+            User::ROLE_ARTIST,
+            User::ROLE_MANAGER,
+            User::ROLE_OWNER,
+            User::ROLE_ADMIN,
+            User::ROLE_SUPERADMIN,
+        ];
+    }
+
+    public function serialize()
+    {
+        return serialize(
+            [
+                $this->id,
+                $this->username,
+                $this->password,
+                $this->enabled
+            ]
+        );
+    }
+
+    public function unserialize($serialized)
+    {
+        list($this->id,
+            $this->username,
+            $this->password,
+            $this->enabled
+            ) = unserialize($serialized);
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -127,6 +167,24 @@ class User implements AdvancedUserInterface, \Serializable
     public function setRoles(array $roles): void
     {
         $this->roles = $roles;
+    }
+
+    public function addRole(string $role): void
+    {
+        $role = strtoupper($role);
+
+        if (in_array($role, $this->getAvailableRoles()) && !in_array($role, $this->roles)) {
+            array_push($this->roles, $role);
+        }
+    }
+
+    public function removeRole(string $role): void
+    {
+        $role = strtoupper($role);
+
+        if (in_array($role, $this->roles)) {
+            array_splice($this->roles, array_search($role, $this->roles), 1);
+        }
     }
 
     public function getPassword()
@@ -163,27 +221,6 @@ class User implements AdvancedUserInterface, \Serializable
     public function eraseCredentials()
     {
 
-    }
-
-    public function serialize()
-    {
-        return serialize(
-            [
-                $this->id,
-                $this->username,
-                $this->password,
-                $this->enabled
-            ]
-        );
-    }
-
-    public function unserialize($serialized)
-    {
-        list($this->id,
-            $this->username,
-            $this->password,
-            $this->enabled
-            ) = unserialize($serialized);
     }
 
     /**

@@ -5,18 +5,36 @@
 {% block content %}
     <h2>{{ 'Studios'|trans }}</h2>
 
-    {% if studioData %}
-        {% for studio in studioData %}
+    {% if ownStudios %}
+        {% for ownStudio in ownStudios %}
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title"><a href="{{ path('profile_studio', {id: studio.Id}) }}" >{{ studio.Name }}</a></h5>
-                    <p class="card-text">{{ 'Address'|trans }}: {{ studio.Address }}</p>
-                    <p class="card-text">{{ 'Styles'|trans }}: {{ studio.Styles|join(', ') }}</p>
-                    <a href="{{ path('profile_studio_edit', {id: studio.Id}) }}" class="card-link">{{ 'Edit'|trans }}</a>
-                    <a href="{{ path('profile_studio_add_employee', {id: studio.Id}) }}" class="card-link">{{ 'Add new employee'|trans }}</a>
+                    <h5 class="card-title"><a href="{{ path('profile_studio', {id: ownStudio.Id}) }}" >{{ ownStudio.Name }}</a></h5>
+                    <p class="card-text">{{ 'Address'|trans }}: {{ ownStudio.Address }}</p>
+                    <p class="card-text">{{ 'Styles'|trans }}: {{ ownStudio.Styles|join(', ') }}</p>
+                    <a href="{{ path('profile_studio_edit', {id: ownStudio.Id}) }}" class="card-link">{{ 'Edit'|trans }}</a>
+                    <a href="{{ path('profile_studio_add_employee', {id: ownStudio.Id}) }}" class="card-link">{{ 'Add new employee'|trans }}</a>
                 </div>
             </div>
         {% endfor %}
+    {% endif %}
+
+    {% if managedStudios %}
+
+    <h2>{{ 'Managed studios'|trans }}</h2>
+
+        {% for managedStudio in managedStudios %}
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"><a href="{{ path('profile_studio', {id: managedStudio.Id}) }}" >{{ managedStudio.Name }}</a></h5>
+                    <p class="card-text">{{ 'Address'|trans }}: {{ managedStudio.Address }}</p>
+                    <p class="card-text">{{ 'Styles'|trans }}: {{ managedStudio.Styles|join(', ') }}</p>
+                    <a href="{{ path('profile_studio_edit', {id: managedStudio.Id}) }}" class="card-link">{{ 'Edit'|trans }}</a>
+                    <a href="{{ path('profile_studio_add_employee', {id: managedStudio.Id}) }}" class="card-link">{{ 'Add new employee'|trans }}</a>
+                </div>
+            </div>
+        {% endfor %}
+
     {% endif %}
 
 {% endblock %}

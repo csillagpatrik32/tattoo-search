@@ -76,6 +76,7 @@ class UserController extends Controller
             $usernameCheck = $this->getDoctrine()
                 ->getRepository(User::class)
                 ->findOneBy(['username' => $username]);
+
             if ($usernameCheck !== null and $username !== $user->getUsername()) {
                 $form->get('username')->addError(
                     new FormError(
@@ -115,11 +116,6 @@ class UserController extends Controller
      */
     public function passwordChange(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
-        /**
-         * @var User $user
-         */
-        $user = $this->getUser();
-
         $formData = [
             'oldPassword' => '',
             'plainPassword' => ''
@@ -134,6 +130,11 @@ class UserController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $formData = $form->getData();
             $plainPassword = $formData['plainPassword'];
+
+            /**
+             * @var User $user
+             */
+            $user = $this->getUser();
 
             $password = $passwordEncoder->encodePassword(
                 $user,
@@ -158,5 +159,104 @@ class UserController extends Controller
                 'form' => $form->createView()
             ]
         ));
+    }
+
+    /**
+     * @Route("/get-artist-profile", name="profile_get_artist")
+     */
+    public function getArtist(Request $request)
+    {
+        /**
+         * @var User
+         */
+        $user = $this->getUser();
+
+        if ($this->isGranted('ROLE_ARTIST')) {
+            $this->addFlash(
+                'danger',
+                'You already have an artist profile'
+            );
+
+            return $this->redirectToRoute('profile');
+        }
+
+        $user->addRole('ROLE_ARTIST');
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        $this->addFlash(
+            'success',
+            'Your account was updated'
+        );
+
+        return $this->redirectToRoute('security_logout');
+    }
+
+    /**
+     * @Route("/remove-artist-profile", name="profile_remove_artist")
+     */
+    public function removeArtist(Request $request)
+    {
+        /**
+         * @var User
+         */
+        $user = $this->getUser();
+
+        if (!$this->isGranted('ROLE_ARTIST')) {
+            $this->addFlash(
+                'danger',
+                'You do not have an artist profile'
+            );
+
+            return $this->redirectToRoute('profile');
+        }
+
+        $user->removeRole('ROLE_ARTIST');
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        $this->addFlash(
+            'success',
+            'Your account was updated'
+        );
+
+        return $this->redirectToRoute('security_logout');
+    }
+
+    /**
+     * @Route("/get-owner-profile", name="profile_get_owner")
+     */
+    public function getOwner(Request $request)
+    {
+        /**
+         * @var User
+         */
+        $user = $this->getUser();
+
+        if ($this->isGranted('ROLE_OWNER')) {
+            $this->addFlash(
+                'danger',
+                'You already have an owner profile'
+            );
+
+            return $this->redirectToRoute('profile');
+        }
+
+        $user->addRole('ROLE_OWNER');
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        $this->addFlash(
+            'success',
+            'Your account was updated'
+        );
+
+        return $this->redirectToRoute('security_logout');
     }
 }

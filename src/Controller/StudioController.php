@@ -35,65 +35,38 @@ class StudioController extends Controller
          */
         $user = $this->getUser();
 
-        $studios = $user->getStudios();
+        $ownStudios = $user->getStudios();
 
-        $studioData = [];
+        $employments = $user->getEmployees();
+        $managedStudio = [];
 
-        /**
-         * @var Studio $studio
-         */
-        foreach($studios as $key => $studio) {
-            $studioData[$key]['Id'] = $studio->getId();
-            $studioData[$key]['Name'] = $studio->getName();
-            $studioData[$key]['Address'] = $studio->getAddress();
-            $studioData[$key]['Styles'] = $studio->getStyles();
+        foreach ($employments as $employee) {
+            $studio = $employee->getStudio();
+            $isManager = $employee->getManager();
+
+            if ($isManager && !$ownStudios->contains($studio)) {
+                array_push($managedStudio, $employee->getStudio());
+            }
         }
 
         return new Response($this->renderView(
             'profile/studios/index.html.twig',
             [
-                'studioData' => $studioData
+                'ownStudios' => $ownStudios,
+                'managedStudios' => $managedStudio,
             ]
         ));
     }
 
     /**
      * @Route("/add", name="profile_add_new_studio")
+     * @Security("is_granted('ROLE_OWNER')")
      */
-    public function add(Request $request, TranslatorInterface $translator, RoutingUtils $routingUtils)
+    public function add(Request $request, TranslatorInterface $translator)
     {
-        /**
-         * @var Studio $studio
-         */
-        $studio = new Studio();
-
-        /**
-         * @var Address $address;
-         */
-        $address = new Address();
-
-        /**
-         * @var Style $style
-         */
-        $style = new Style();
-
-        /**
-         * @var User $user
-         */
-        $user = $this->getUser();
-
-        $formData = [
-            'name' => '',
-            'country' => '',
-            'city' => '',
-            'style' => $style,
-        ];
-
-        $formData = $routingUtils->mergeSessionEntities('formData');
-
         $form = $this->createForm(
             AddStudio::class,
-            $formData
+            []
         );
         $form->handleRequest($request);
 
@@ -107,7 +80,8 @@ class StudioController extends Controller
             $studioNameCheck = $this->getDoctrine()
                 ->getRepository(Studio::class)
                 ->findOneBy(['name' => $studioName]);
-            if ($studioNameCheck !== null) {
+
+            if ($studioNameCheck) {
                 $form->get('name')->addError(
                     new FormError(
                         $translator->trans(
@@ -118,6 +92,21 @@ class StudioController extends Controller
                     )
                 );
             } else {
+                /**
+                 * @var Studio $studio
+                 */
+                $studio = new Studio();
+
+                /**
+                 * @var Address $address;
+                 */
+                $address = new Address();
+
+                /**
+                 * @var User $user
+                 */
+                $user = $this->getUser();
+
                 $studio->setName($studioName);
                 $studio->setOwner($user);
 
@@ -135,7 +124,7 @@ class StudioController extends Controller
                 $entityManager->flush();
                 $this->addFlash(
                     'success',
-                    'The new studios was added to your account'
+                    'The new studio was added to your account'
                 );
 
                 return $this->redirectToRoute('profile_studios');
@@ -153,7 +142,7 @@ class StudioController extends Controller
      * @Route("/edit/{id}", name="profile_studio_edit")
      * @Security("is_granted('edit', studio)")
      */
-    public function edit(Studio $studio, Request $request, TranslatorInterface $translator, RoutingUtils $routingUtils)
+    public function edit(Studio $studio, Request $request, TranslatorInterface $translator)
     {
         $formData = [
             'name' => $studio->getName(),
@@ -161,8 +150,6 @@ class StudioController extends Controller
             'city' => $studio->getAddress()->getCity(),
             'style' => $studio->getStyles(),
         ];
-
-        //$formData = $routingUtils->mergeSessionEntities('formData');
 
         $form = $this->createForm(
             AddStudio::class,
@@ -180,7 +167,8 @@ class StudioController extends Controller
             $studioNameCheck = $this->getDoctrine()
                 ->getRepository(Studio::class)
                 ->findOneBy(['name' => $studioName]);
-            if ($studioNameCheck !== null and $studioName !== $studio->getName()) {
+
+            if ($studioNameCheck and $studioName !== $studio->getName()) {
                 $form->get('name')->addError(
                     new FormError(
                         $translator->trans(
@@ -223,7 +211,7 @@ class StudioController extends Controller
      * @Route("/{id}", name="profile_studio")
      * @Security("is_granted('edit', studio)")
      */
-    public function single(Studio $studio, Request $request, RoutingUtils $routingUtils)
+    public function single(Studio $studio, Request $request)
     {
         return $this->render('profile/studios/single.html.twig',
             [
@@ -233,13 +221,11 @@ class StudioController extends Controller
     }
 
     /**
-     * @Route("/add-employee/{id}", name="profile_studio_add_employee")
+     * @Route("/{id}/add-employee", name="profile_studio_add_employee")
      * @Security("is_granted('edit', studio)")
      */
     public function addEmployee(Studio $studio, Request $request, TranslatorInterface $translator)
     {
-        $employee = new Employee();
-
         $form = $this->createForm(
             AddEmployee::class,
             []
@@ -249,6 +235,7 @@ class StudioController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $formData = $form->getData();
             $user = $formData['user'];
+            $manager = $formData['manager'];
             $startDate = $formData['startDate'];
             $endDate = $formData['endDate'];
 
@@ -267,12 +254,24 @@ class StudioController extends Controller
                     )
                 );
             } else {
+                /**
+                 * @var Employee
+                 */
+                $employee = new Employee();
+
                 $employee->setUser($user);
                 $employee->setStudio($studio);
                 $employee->setStartDate($startDate);
                 $employee->setEndDate($endDate);
+                $employee->setManager($manager);
 
                 $entityManager = $this->getDoctrine()->getManager();
+
+                if ($manager) {
+                    $user->addRole('ROLE_MANAGER');
+                    $entityManager->persist($user);
+                }
+
                 $entityManager->persist($employee);
                 $entityManager->flush();
 
@@ -293,18 +292,20 @@ class StudioController extends Controller
     }
 
     /**
-     * @Route("/edit-employee/{id}", name="profile_studio_edit_employee")
+     * @Route("/{id}/edit-employee/{employee}", name="profile_studio_edit_employee")
+     * @Security("is_granted('edit', studio)")
      */
-    public function editEmployee(Employee $employee, Request $request, TranslatorInterface $translator)
+    public function editEmployee(Studio $studio, Employee $employee, Request $request, TranslatorInterface $translator)
     {
-        $studio = $employee->getStudio();
-
-        $this->denyAccessUnlessGranted('edit', $studio);
+        if ($studio !== $employee->getStudio()) {
+            throw $this->createNotFoundException($translator->trans('This employee was not found for this studio'));
+        }
 
         $form = $this->createForm(
             AddEmployee::class,
             [
                 'user' => $employee->getUser(),
+                'manager' => $employee->getManager(),
                 'startDate' => $employee->getStartDate(),
                 'endDate' => $employee->getEndDate(),
             ]
@@ -314,6 +315,7 @@ class StudioController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $formData = $form->getData();
             $user = $formData['user'];
+            $manager = $formData['manager'];
             $startDate = $formData['startDate'];
             $endDate = $formData['endDate'];
 
@@ -332,18 +334,36 @@ class StudioController extends Controller
                     )
                 );
             } else {
+                if ($employee->getManager() !== $manager) {
+                    $this->addFlash(
+                        'warning',
+                        $user->getFullName().' needs to relog to see the changes'
+                    );
+                }
+
                 $employee->setUser($user);
+                $employee->setManager($manager);
                 $employee->setStudio($studio);
                 $employee->setStartDate($startDate);
                 $employee->setEndDate($endDate);
 
                 $entityManager = $this->getDoctrine()->getManager();
+
+
+                if ($manager) {
+                    $user->addRole('ROLE_MANAGER');
+                } else {
+                    $user->removeRole('ROLE_MANAGER');
+                }
+
+                $entityManager->persist($user);
+
                 $entityManager->persist($employee);
                 $entityManager->flush();
 
                 $this->addFlash(
                     'success',
-                    'The employee was updated'
+                    $user->getFullName().' was updated'
                 );
 
                 return $this->redirectToRoute('profile_studio', ['id' => $studio->getId()]);
@@ -358,13 +378,14 @@ class StudioController extends Controller
     }
 
     /**
-     * @Route("/delete-employee/{id}", name="profile_studio_delete_employee")
+     * @Route("/{id}/delete-employee/{employee}", name="profile_studio_delete_employee")
+     * @Security("is_granted('delete', studio)")
      */
-    public function deleteEmployee(Employee $employee, Request $request, TranslatorInterface $translator)
+    public function deleteEmployee(Studio $studio, Employee $employee, Request $request, TranslatorInterface $translator)
     {
-        $studio = $employee->getStudio();
-
-        $this->denyAccessUnlessGranted('delete', $studio);
+        if ($studio !== $employee->getStudio()) {
+            throw $this->createNotFoundException($translator->trans('This employee was not found for this studio'));
+        }
 
         $studio->removeEmployee($employee);
 

@@ -17,8 +17,8 @@
                             {% for employee in studio.Employees %}
                                 <li class="list-group-item">{{ employee }}
                                     <span class="float-right">
-                                        <a href="{{ path('profile_studio_edit_employee', {'id': employee.Id}) }}">Edit</a>
-                                        <a href="{{ path('profile_studio_delete_employee', {'id': employee.Id}) }}">Delete</a>
+                                        <a href="{{ path('profile_studio_edit_employee', {id: studio.Id, employee: employee.Id}) }}">{{ 'Edit'|trans }}</a>
+                                        <a href="{{ path('profile_studio_delete_employee', {id: studio.Id, employee: employee.Id}) }}">{{ 'Delete'|trans }}</a>
                                     </span>
                                 </li>
                             {% endfor %}

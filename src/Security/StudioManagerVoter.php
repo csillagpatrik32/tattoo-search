@@ -3,13 +3,16 @@
 namespace App\Security;
 
 
+use App\Entity\Employee;
 use App\Entity\Studio;
 use App\Entity\User;
+use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
-class StudioVoter extends Voter
+class StudioManagerVoter extends Voter
 {
     const DELETE = 'delete';
     const EDIT = 'edit';
@@ -19,9 +22,10 @@ class StudioVoter extends Voter
      */
     private $decisionManager;
 
-    public function __construct(AccessDecisionManagerInterface $decisionManager)
+    public function __construct(AccessDecisionManagerInterface $decisionManager, EntityManagerInterface $entityManager)
     {
         $this->decisionManager = $decisionManager;
+        $this->entityManager = $entityManager;
     }
 
     protected function supports($attribute, $subject)
@@ -54,7 +58,13 @@ class StudioVoter extends Voter
          */
         $studio = $subject;
 
-        return $studio->getOwner()->getId() === $authenticatedUser->getId();
+        $employee = $this->entityManager->getRepository(Employee::class)->findBy([
+            'user' => $authenticatedUser->getId(),
+            'studio' => $studio->getId(),
+            'manager' => true,
+        ]);
+
+        return $employee;
     }
 
 }

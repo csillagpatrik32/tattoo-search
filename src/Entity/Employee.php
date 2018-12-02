@@ -36,13 +36,22 @@ class Employee
      */
     private $endDate;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $manager;
+
+    public function __construct()
+    {
+        $this->isManager = false;
+    }
+
     public function __toString()
     {
-        if ($this->endDate) {
-            return $this->user->getFullName().' from '.$this->startDate->format('Y-m-d').' to '.$this->endDate->format('Y-m-d');
-        }
+        $endDate = ($this->endDate) ? ' to '.$this->endDate->format('Y-m-d') : '';
+        $manager = ($this->manager) ? ' (Manager) ' : ' ';
 
-        return $this->user->getFullName().' from '.$this->startDate->format('Y-m-d');
+        return $this->user->getFullName().$manager.'from '.$this->startDate->format('Y-m-d').$endDate;
     }
 
     public function getId(): ?int
@@ -123,4 +132,22 @@ class Employee
         return $this;
     }
 
+
+    /**
+     * @return mixed
+     */
+    public function getManager()
+    {
+        return $this->manager;
+    }
+
+    /**
+     * @param mixed $manager
+     */
+    public function setManager($manager): self
+    {
+        $this->manager = $manager;
+
+        return $this;
+    }
 }

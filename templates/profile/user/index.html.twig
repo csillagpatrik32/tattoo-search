@@ -29,5 +29,13 @@
 
         </tbody>
     </table>
+    {% if not is_granted('ROLE_OWNER') %}
+        <a href="{{ path('profile_get_owner') }}">{{ 'I am a studio owner'|trans }}</a>
+    {% endif %}
+    {% if is_granted('ROLE_ARTIST') %}
+        <a href="{{ path('profile_remove_artist') }}">{{ 'Remove artist profile'|trans }}</a>
+    {% else %}
+        <a href="{{ path('profile_get_artist') }}">{{ 'Get artist profile'|trans }}</a>
+    {% endif %}
 {% endblock %}
 
