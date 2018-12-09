@@ -169,8 +169,12 @@
                 <target>Le studio a été mis à jour</target>
             </trans-unit>
             <trans-unit id="flashes.studio_employee_update">
-                <source>The employee was updated</source>
-                <target>L'employé a été mis à jour</target>
+                <source> was updated</source>
+                <target> a été mis à jour</target>
+            </trans-unit>
+            <trans-unit id="flashes.studio_employee_relog">
+                <source> needs to relog to see the changes</source>
+                <target> doit se reconnecter pour voir les changements</target>
             </trans-unit>
             <trans-unit id="flashes.studio_employee_add">
                 <source>The employee was added to the studio</source>
@@ -284,6 +288,26 @@
                 <source>Edit employee</source>
                 <target>Editer un employé</target>
             </trans-unit>
+            <trans-unit id="profile.studio_edit">
+                <source>Edit studios</source>
+                <target>Studios bearbeiten</target>
+            </trans-unit>
+            <trans-unit id="profile.studios_managed">
+                <source>Managed studios</source>
+                <target>Studios gérés</target>
+            </trans-unit>
+            <trans-unit id="profile.remove_artist_profile">
+                <source>Remove artist profile</source>
+                <target>Supprimer le profil de l'artiste</target>
+            </trans-unit>
+            <trans-unit id="profile.get_artist_profile">
+                <source>Get artist profile</source>
+                <target>Obtenir le profil de l'artiste</target>
+            </trans-unit>
+            <trans-unit id="profile.manager">
+                <source>Manager</source>
+                <target>Directeur</target>
+            </trans-unit>
 
             <trans-unit id="search.search">
                 <source>Search</source>
@@ -300,6 +324,11 @@
             <trans-unit id="search.no_result">
                 <source>No result found</source>
                 <target>Aucun résultat trouvé</target>
+            </trans-unit>
+
+            <trans-unit id="error.employee_studio">
+                <source>This employee was not found for this studio</source>
+                <target>Cet employé n'a pas été trouvé pour ce studio</target>
             </trans-unit>
         </body>
     </file>

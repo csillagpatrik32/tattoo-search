@@ -30,8 +30,7 @@ class UserType extends AbstractType
                 'mapped' => false,
                 'constraints' => new IsTrue(),
                 'label' => 'I agree to the terms of service'
-            ])
-            ->add('register',SubmitType::class);
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -1,5 +1,5 @@
 .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
-.container { width: 590px; }
+.container { width: 590px !important; }
 .dropdown-menu {
     min-width: 0px !important;
 }

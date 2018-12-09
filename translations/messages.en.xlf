@@ -166,8 +166,12 @@
                 <target>The studio was updated</target>
             </trans-unit>
             <trans-unit id="flashes.studio_employee_update">
-                <source>The employee was updated</source>
-                <target>The employee was updated</target>
+                <source> was updated</source>
+                <target> was updated</target>
+            </trans-unit>
+            <trans-unit id="flashes.studio_employee_relog">
+                <source> needs to relog to see the changes</source>
+                <target> needs to relog to see the changes</target>
             </trans-unit>
             <trans-unit id="flashes.studio_employee_add">
                 <source>The employee was added to the studio</source>
@@ -294,7 +298,26 @@
                 <source>Edit employee</source>
                 <target>Edit employee</target>
             </trans-unit>
-
+            <trans-unit id="profile.studio_edit">
+                <source>Edit studios</source>
+                <target>Edit studios</target>
+            </trans-unit>
+            <trans-unit id="profile.studios_managed">
+                <source>Managed studios</source>
+                <target>Managed studios</target>
+            </trans-unit>
+            <trans-unit id="profile.remove_artist_profile">
+                <source>Remove artist profile</source>
+                <target>Remove artist profile</target>
+            </trans-unit>
+            <trans-unit id="profile.get_artist_profile">
+                <source>Get artist profile</source>
+                <target>Get artist profile</target>
+            </trans-unit>
+            <trans-unit id="profile.manager">
+                <source>Manager</source>
+                <target>Manager</target>
+            </trans-unit>
 
             <trans-unit id="search.search">
                 <source>Search</source>
@@ -311,6 +334,11 @@
             <trans-unit id="search.no_result">
                 <source>No result found</source>
                 <target>No result found</target>
+            </trans-unit>
+
+            <trans-unit id="error.employee_studio">
+                <source>This employee was not found for this studio</source>
+                <target>This employee was not found for this studio</target>
             </trans-unit>
         </body>
     </file>

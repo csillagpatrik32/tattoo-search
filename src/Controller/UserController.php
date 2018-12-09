@@ -35,7 +35,6 @@ class UserController extends Controller
             'Username' => $user->getUsername(),
             'Email' => $user->getEmail(),
             'Full name' => $user->getFullName(),
-            'Studio' => implode(', ', $user->getStudios()->toArray()),
         ];
 
         return new Response($this->renderView(

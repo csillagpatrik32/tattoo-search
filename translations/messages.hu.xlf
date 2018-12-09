@@ -170,8 +170,12 @@
                 <target>A stúdió módosítva lett</target>
             </trans-unit>
             <trans-unit id="flashes.studio_employee_update">
-                <source>The employee was updated</source>
-                <target>A munkavállaló módosítva lett</target>
+                <source> was updated</source>
+                <target> módosítva lett</target>
+            </trans-unit>
+            <trans-unit id="flashes.studio_employee_relog">
+                <source> needs to relog to see the changes</source>
+                <target> csak akkor fogja látni a változást, ha újra bejelentkezett</target>
             </trans-unit>
             <trans-unit id="flashes.studio_employee_add">
                 <source>The employee was added to the studio</source>
@@ -292,7 +296,27 @@
             </trans-unit>
             <trans-unit id="profile.studio_edit_employee">
                 <source>Edit employee</source>
-                <target>Munkavállaló szerkesztése</target>
+                <target>Munkavállaló módosítása</target>
+            </trans-unit>
+            <trans-unit id="profile.studio_edit">
+                <source>Edit studios</source>
+                <target>Stúdiók módosítása</target>
+            </trans-unit>
+            <trans-unit id="profile.studios_managed">
+                <source>Managed studios</source>
+                <target>Menedzselt stúdiók</target>
+            </trans-unit>
+            <trans-unit id="profile.remove_artist_profile">
+                <source>Remove artist profile</source>
+                <target>Művész profil eltávolítása</target>
+            </trans-unit>
+            <trans-unit id="profile.get_artist_profile">
+                <source>Get artist profile</source>
+                <target>Művész profilra váltás</target>
+            </trans-unit>
+            <trans-unit id="profile.manager">
+                <source>Manager</source>
+                <target>Menedzser</target>
             </trans-unit>
 
             <trans-unit id="search.search">
@@ -310,6 +334,11 @@
             <trans-unit id="search.no_result">
                 <source>No result found</source>
                 <target>Nincs eredménye a keresésnek</target>
+            </trans-unit>
+
+            <trans-unit id="error.employee_studio">
+                <source>This employee was not found for this studio</source>
+                <target>Ez az alkalmazott nem található ennél a stúdiónál</target>
             </trans-unit>
         </body>
     </file>

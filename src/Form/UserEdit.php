@@ -25,8 +25,7 @@ class UserEdit extends AbstractType
                     new Assert\Length(['min' => 4, 'max' => 50]),
                     new Assert\NotBlank()
                 ]
-            ])
-            ->add('edit',SubmitType::class);
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

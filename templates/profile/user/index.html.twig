@@ -14,13 +14,7 @@
 
             <tr>
                 <th scope="row">{{ key|trans }}</th>
-                <td>
-                    {% if key is same as ('Studio') %}
-                        <a href="{{ path('profile_studios') }}">{{ val }}</a>
-                    {% else %}
-                        {{ val }}
-                    {% endif %}
-                </td>
+                <td>{{ val }}</td>
             </tr>
 
             {% endif %}

@@ -21,8 +21,7 @@ class UserPasswordForgotten extends AbstractType
                 new Assert\Email()
 
             ]
-        ])
-            ->add('submit',SubmitType::class);
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

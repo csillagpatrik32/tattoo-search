@@ -166,8 +166,12 @@
                 <target>Das Studio wurde aktualisiert</target>
             </trans-unit>
             <trans-unit id="flashes.studio_employee_update">
-                <source>The employee was updated</source>
-                <target>Der Mitarbeiter wurde aktualisiert</target>
+                <source> was updated</source>
+                <target> wurde aktualisiert</target>
+            </trans-unit>
+            <trans-unit id="flashes.studio_employee_relog">
+                <source> needs to relog to see the changes</source>
+                <target> muss sich erneut anmelden, um die Änderungen zu sehen</target>
             </trans-unit>
             <trans-unit id="flashes.studio_employee_add">
                 <source>The employee was added to the studio</source>
@@ -295,6 +299,26 @@
                 <source>Edit employee</source>
                 <target>Mitarbeiter bearbeiten</target>
             </trans-unit>
+            <trans-unit id="profile.studio_edit">
+                <source>Edit studios</source>
+                <target>Studios bearbeiten</target>
+            </trans-unit>
+            <trans-unit id="profile.studios_managed">
+                <source>Managed studios</source>
+                <target>Gemanagte Studios</target>
+            </trans-unit>
+            <trans-unit id="profile.remove_artist_profile">
+                <source>Remove artist profile</source>
+                <target>Künstlerprofil entfernen</target>
+            </trans-unit>
+            <trans-unit id="profile.get_artist_profile">
+                <source>Get artist profile</source>
+                <target>Künstlerprofil abrufen</target>
+            </trans-unit>
+            <trans-unit id="profile.manager">
+                <source>Manager</source>
+                <target>Manager</target>
+            </trans-unit>
 
             <trans-unit id="search.search">
                 <source>Search</source>
@@ -311,6 +335,11 @@
             <trans-unit id="search.no_result">
                 <source>No result found</source>
                 <target>Keine Einträge gefunden</target>
+            </trans-unit>
+
+            <trans-unit id="error.employee_studio">
+                <source>This employee was not found for this studio</source>
+                <target>Dieser Mitarbeiter wurde für dieses Studio nicht gefunden</target>
             </trans-unit>
         </body>
     </file>

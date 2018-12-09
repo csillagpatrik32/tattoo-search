@@ -31,8 +31,7 @@ class UserPasswordChange extends AbstractType
                     new Length(['min' => 8, 'max' => 254]),
                     new NotBlank()
                 ]
-            ])
-            ->add('edit',SubmitType::class);
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

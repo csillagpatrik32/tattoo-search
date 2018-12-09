@@ -22,13 +22,12 @@
             </div>
             <input type="checkbox" id="remember_me" name="_remember_me" checked />
             <label for="remember_me">{{ 'Remember me'|trans }}</label>
-            <div class="form-group">
-                <button type="submit" id="Login" name="Login" class="btn-secondary btn">{{ 'Sign in'|trans }}</button>
-            </div>
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
             <input type="hidden" name="_target_path" value="{{ app.request.get('redirect_to') }}">
         </div>
+        <button type="submit" id="Login" name="Login" class="btn-secondary btn">{{ 'Sign in'|trans }}</button>
     </form>
+    <br>
     <a href="{{ path('user_register') }}"/>{{ 'Not a member yet?'|trans }}</a><br />
     <hr>
     <a href="{{ path('security_password_forgotten') }}"/>{{ 'Did you forget your password?'|trans }}</a>

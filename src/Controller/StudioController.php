@@ -334,13 +334,6 @@ class StudioController extends Controller
                     )
                 );
             } else {
-                if ($employee->getManager() !== $manager) {
-                    $this->addFlash(
-                        'warning',
-                        $user->getFullName().' needs to relog to see the changes'
-                    );
-                }
-
                 $employee->setUser($user);
                 $employee->setManager($manager);
                 $employee->setStudio($studio);
@@ -349,21 +342,35 @@ class StudioController extends Controller
 
                 $entityManager = $this->getDoctrine()->getManager();
 
-
                 if ($manager) {
                     $user->addRole('ROLE_MANAGER');
                 } else {
-                    $user->removeRole('ROLE_MANAGER');
+                    if (count($this->getDoctrine()->getRepository(Employee::class)->findBy([
+                        'user' => $employee->getUser()->getId(),
+                        'manager' => true,
+                    ])) < 2) {
+                        $user->removeRole('ROLE_MANAGER');
+                    };
+                }
+
+                if ($employee->getManager() !== $manager) {
+                    $this->addFlash(
+                        'warning',
+                        $user->getFullName().$translator->trans(
+                            ' needs to relog to see the changes'
+                        )
+                    );
                 }
 
                 $entityManager->persist($user);
-
                 $entityManager->persist($employee);
                 $entityManager->flush();
 
                 $this->addFlash(
                     'success',
-                    $user->getFullName().' was updated'
+                    $user->getFullName().$translator->trans(
+                        ' was updated'
+                    )
                 );
 
                 return $this->redirectToRoute('profile_studio', ['id' => $studio->getId()]);
